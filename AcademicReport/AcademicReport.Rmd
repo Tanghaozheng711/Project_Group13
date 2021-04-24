@@ -20,7 +20,7 @@ Since there are many sub-factors in family background and lifestyle choices, the
 # Motivation and Objectives
 Despite similar studies on the impact of lifestyle and family demographics on grades being done in past works, there is a general lack firstly a visualization of the data set where the data is mostly discussed through words and numbers. 
 
-Our work was hence motivated by the absence of data visualization and interactivity of variables identified for analysis in the impact it has on student grades. To fill this gap, our goal is to create an application that allows users to be able to not just see the final results of which variable has the highest impact on grades, but to allow the exploration of the data set in an interactive way, to have a better sense of the data set, as well as to compare the impact between each variable.
+Our work was hence motivated by the absence of data visualization and interactivity of variables identified for analysis in the impact it has on student grades. This would be important in allowing users to explore the data to gain insights on it. To fill this gap, our goal is to create an application that allows users to be able to not just see the final results of which variable has the highest impact on grades, but to allow the exploration of the data set in an interactive way, to have a better sense of the data set, as well as to compare the impact between each variable.
 
 The application will include the following features in order to fulfill the above objectives:
 
@@ -32,35 +32,30 @@ The application will include the following features in order to fulfill the abov
 
 4) To provide interactive functions to perform data exploration
 
-to mention:
-statistical results
-
 # Literature Review
 
-Through performing a literature review, we found various studies that explore how one's lifestyle affects a student's academic performance. However, as lifestyle being such a generic term, many variables can be considered lifestyle. As such, majority of these studies focus on physical activity and eating habits which are not variables in our study. However, similar studies can be found for research on the impact of family background on academic performance. 
+Through performing a literature review, we found various studies that explore how one's lifestyle affects a student's academic performance. However, as lifestyle being such a generic term, many variables can be considered lifestyle. As such, majority of these studies focus on physical activity and eating habits which are not variables in our study. 
 
-From the review on the studies we went through, it was observed that these either only provided tabular data on the data set, or basic charts for data visualization. Most studies also do not provide much exploration of the data set.
-
-https://link.springer.com/content/pdf/10.1186/s40711-018-0083-8.pdf
-https://www.brookings.edu/research/how-life-outside-of-a-school-affects-student-performance-in-school/
+However, from these papers went through, it was observed that these either only provided tabular data on the data set, or basic charts for data visualization. Most studies also do not provide much exploration of the data set. For example in a study by Li and Qiu (2018), the focus was largely on finding out what impacts a student's academic performance, but provided only an overview of the data set used. No data visualization or any interactivity was available for users to have a closer look at the data. 
 
 # Design Framework
-
-A detail description of the design principles used and data visualisation elements built 
 
 The application will allow users to review three main types of analysis - exploratory and confirmatory data analysis, clustering analysis and predictive modeling. These being the main analysis types will be split by a separate tab in the application. Within each of these analysis types will involve different charts, which will include some functions of interactivity to allow the user to explore the data further. 
 
 In designing the individual charts, we first look at the analysis to be performed, then choose the appropriate chart type for visualization. 
 
-In exploratory data analysis, three charts will be utilized. Firstly, for the purpose of reviewing the distribution and proportions of each variable, a bar chart was used where the percentage proportions were included in the charts for clarity in cases where the proportions are similar. Secondly, to compare inputs between each variable against the average grade, the violin chart was used, with an overlay of the box plot. 
+In exploratory data analysis, three charts will be utilized. Firstly, for the purpose of reviewing the distribution and proportions of each variable, a bar chart was used where the percentage proportions were included in the charts for clarity in cases where the proportions are similar. Secondly, to compare inputs between each variable against the average grade, the violin chart was used, with an overlay of the box plot. Third, a correlation plot was utilized to show the correlation amongst the variables, including the target variable, average grade. With many variables, an interactive correlation plot will also be available for selection should the user wish to view specific correlation scores. This is because with the many variables in the data set, putting in numbers into each cell might cause the chart to become messy. 
 
+For the clustering analysis, 
 
-For example, a simple bar chart will be able to fulfill . Then, we look at how we can involve elements of interactivity, which will allow the user to choose different inputs, for example the variable, for further exploration. The demonstration of using each chart will be discussed below. 
+Finally for the predictive model analysis, 
+
+The demonstration of using each chart will be discussed further below. 
 
 
 # Data Preparation
 
-All data preparation was performed using R. The data set used in this study was taken from [Kaggle](https://www.kaggle.com/uciml/student-alcohol-consumption), which contains two csv files, student-mat.csv and student-por.csv. The data was obtained from a survey of Portuguese students aged 15 to 22 on family demographics, lifestyle factors, along with their grades in mathematics and Portuguese language. The data set contains other variables that can be broadly classified into family demographics and lifestyle factors. 
+The data set used in this study was taken from [Kaggle](https://www.kaggle.com/uciml/student-alcohol-consumption), which contains two csv files, student-mat.csv and student-por.csv. The data was obtained from a survey of Portuguese students aged 15 to 22 from two schools on family demographics, lifestyle factors, along with their grades in mathematics and Portuguese language. The data set contains other variables that can be broadly classified into family demographics and lifestyle factors. 
 
 Below are the variables included in the data set:
 
@@ -98,7 +93,7 @@ Below are the variables included in the data set:
 - Second period grade
 - Final grade
 
-Further data cleaning and manipulation was done, including splitting the data set by school and subject taken, as well as having a new variable average grade, which will be used as the target variable.
+Further data cleaning and manipulation was done, such as creating dummy variables for non-binary categorical variables, as well as having a new variable average grade, which will be used as the target variable. The data set was also split into four smaller data sets based on school and subject taken. This is reduce any variability due to the school the the student attends or the subject the student takes. Part of the interactivity will include the selection of the data set, to allow the user to explore the data sets of each combination of school and subject. 
 
 # The Application
 
@@ -106,7 +101,7 @@ Further data cleaning and manipulation was done, including splitting the data se
 
 ### Distribution and Proportions
 
-The bar chart and histogram will be used for users to see the distribution of proportions within each variable. This gives a clear breakdown and proportion of the inputs in each variable. Nominal data variables will utilize this bar chart, where the percentage proportion will be indicated so that comparisons can be done not out of estimation, but with clear data. Here, the user is able to firstly select which data set he or she wishes to study further, then the variable to review can be selected next. 
+The bar chart and histogram will be used for users to see the distribution of proportions within each variable. This gives a clear breakdown and proportion of the inputs in each variable. Nominal data variables will utilize this bar chart, where the percentage proportion will be indicated so that comparisons can be done not out of estimation, but with clear data. Here, the user is able to firstly select the data set of interest, then the variable to review can be selected next. 
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', fig.align='center', fig.cap='Bar Chart', fig.height=4}
 knitr::include_graphics("barchart.png")
@@ -152,9 +147,11 @@ The user is firstly able to select
 
 Being able to demonstrate the data visualization and implementation of interactivity within the application allows users to further explore data sets in a deeper way. Beyond just knowing what impacts a student's grades, the user is able to explore the demographics of the students as well as to study certain groups of students. 
 
-Although our application was able to pick out some of the more significant variables, the results are not as ideal as we wanted. Hence, further work could be done to firstly implement and compare other methods of analysis and modeling, and secondly to have a larger data set to obtain more accurate results. Another function where users can input their own data sets would be useful, to allow this application to be applicable to any user who has a data set that they would like to explore and perform analysis on. 
+Although our application was able to pick out some of the more significant variables, the results are not as ideal as we wanted. Hence, further work could be done to firstly implement and compare other methods of analysis and modeling. Secondly, to have a larger data set to obtain more accurate results. 
 
-## Acknowledgements
+Implementing another function where users can input their own data sets would be useful, to allow this application to be applicable to any user who has a data set that they would like to explore and perform analysis on. 
+
+**Acknowledgements**
 
 The authors would like to thank Prof. Kam Tin Seong for his guidance and support in the completion of this project. 
 
@@ -162,38 +159,21 @@ The authors would like to thank Prof. Kam Tin Seong for his guidance and support
 
 ---
 references:
-- id: meier2012
-  title: Professinal Android 4 Application Development
-  author: 
-  - family: Meier
-    given: Reto
-  type: book
-  publisher: John Wiley & Sons, Inc.
-  issued:
-    year: 2012
-    month: 5
 - id: fenner2012a
-  title: One-click science marketing
+  title: How does family background affect children’s educational achievement? Evidence from Contemporary China
   author:
-  - family: Fenner
-    given: Martin
-  container-title: Nature Materials
-  volume: 11
-  URL: 'https://doi.org/10.1038/nmat3283'
+  - family: Li
+    given: Zhonglu
+  - family: Qiu
+    given: Zeqi
+  container-title: The Journal of Chinese Sociology
+  URL: 'https://doi.org/10.1186/s40711-018-0083-8'
   DOI: 10.1038/nmat3283
-  issue: 4
-  publisher: Nature Publishing Group
-  page: 261-263
   type: article-journal
   issued:
-    year: 2012
-    month: 3
+    year: 2018
+    month: 10
 ...
-
-Appendix:
-
-metadata
-
 
 
 

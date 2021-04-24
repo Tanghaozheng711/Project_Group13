@@ -130,7 +130,7 @@ color: #000000
 background-color: #ffffff;
 }
 .poster_title h1 {
-font-size: 60px;
+font-size: 65px;
 margin: 0;
 border: 0;
 font-weight: normal;
@@ -288,15 +288,11 @@ font-size: 20pt;
 </div>
 <!-- Right Logo  -->
 <div class="logo_right">
-<img src=smu1.png style="width: 80%">
 </div>
 </div>
 
 <div class='poster_body_wrap'>
 <div class='poster_body'>
-<p>Approach - A description of the techniques or algorithms you used to solve the problem.
-Results - Screenshots and a working demo of the system you built.
-Future Work - An explanation of how the work could be extended.</p>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
 <p>Education has a significant impact on a person, be it in terms of employment opportunities and quality of life. It is hence important to know what are factors that affect one’s academic performance. While there are many factors that can impact a person’s academic performance, family background and one’s lifestyle are two of the larger factors. While there are studies on the correlation between lifestyle and grades, data visualization and interactivity are mostly left out from these studies.</p>
@@ -308,7 +304,8 @@ Future Work - An explanation of how the work could be extended.</p>
 <div id="approachmethodology" class="section level1">
 <h1>Approach/Methodology</h1>
 <p>Using R, we first performed data wrangling to import the raw data into R. Then, categorical data were transformed into multiple dummy binary data, while data type for ordinal data were set as ordinal. We also split the data by school and subject, to remove the variability in grades due to these variables.</p>
-<p>Exploratory analysis was performed to firstly explore the data set, then clustering analysis was done to group similar data sets together.</p>
+<p>Exploratory analysis was performed to explore the data set in terms of proportions within each variable. Then, clustering analysis was done to group students similar in terms of their demographics. Subsequently these clusters were compared against each other within individual variables to study the differences between these groups.</p>
+<p>Finally, predictive analysis was performed to identify variables that have significant impact to a student’s grades.</p>
 </div>
 <div id="exploratory-data-analysis" class="section level1">
 <h1>Exploratory Data Analysis</h1>
@@ -319,14 +316,20 @@ Future Work - An explanation of how the work could be extended.</p>
 Figure 1: Great figure!
 </p>
 </div>
-<strong>Violin Chart:</strong> The violin chart provides the user with the distribution and the mean grades for each of the inputs in each variable selected. The chart also provides comparisons between the inputs, where if there is a significant difference in grades, the p-value will be shown.
+<strong>Violin Chart:</strong> The violin chart overlayed with a boxplot provides the user with the distribution and the mean grades for each of the inputs in each variable selected. The chart also provides comparisons between the inputs, where if there is a significant difference in grades, the p-value will be shown.
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
 <img src="barchart.png" alt="Great figure!" width="80%" />
 <p class="caption">
 Figure 2: Great figure!
 </p>
 </div>
-<p><strong>Correlation Chart:</strong> The correlation plot gives the user an overview of the correlations between each variable, including the average grade where positive and negative correlation are indicated by blue and red respectively. Here, the user can select a static plot or an interactive plot, which the user is able view the correlation value by hovering the cursor over the specific cell.</p>
+<strong>Correlation Chart:</strong> The correlation plot gives the user an overview of the correlations between each variable, including the average grade where positive and negative correlation are indicated by blue and red respectively. Here, the user can select a static plot or an interactive plot, where the user is able view the correlation value by hovering the cursor over the specific cell.
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
+<img src="barchart.png" alt="Great figure!" width="80%" />
+<p class="caption">
+Figure 3: Great figure!
+</p>
+</div>
 </div>
 <div id="cluster-analysis" class="section level1">
 <h1>Cluster Analysis</h1>
@@ -345,19 +348,6 @@ Figure 2: Great figure!
 <li><p>Exploring more methods of analysis, for example latent class analysis for clustering analysis will be useful in comparing results from different methods</p></li>
 <li></li>
 </ul>
-<p>Welcome to <code>posterdown</code> ! This is my attempt to provide a semi-smooth workflow for those who wish to take their R Markdown skills to the conference world. Most features from R Markdown are available in this package such as Markdown section notation, figure captioning, and even citations like this one <span class="citation">(Allaire et al. 2021)</span>. The rest of this example poster will show how you can insert typical conference poster features into your own document.</p>
-</div>
-<div id="conclusion" class="section level1">
-<h1>Conclusion</h1>
-<p>Try <code>posterdown</code> out! Hopefully you like it!</p>
-</div>
-<div id="references" class="section level1 unnumbered">
-<h1>References</h1>
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-R-rmarkdown" class="csl-entry">
-Allaire, JJ, Yihui Xie, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, Hadley Wickham, Joe Cheng, Winston Chang, and Richard Iannone. 2021. <em>Rmarkdown: Dynamic Documents for r</em>. <a href="https://CRAN.R-project.org/package=rmarkdown">https://CRAN.R-project.org/package=rmarkdown</a>.
-</div>
-</div>
 </div>
 </div>
 </div>
