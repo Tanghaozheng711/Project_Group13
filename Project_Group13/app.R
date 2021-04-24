@@ -4,8 +4,8 @@ library(shinydashboard)
 
 ### -----------------------------------------------------------------------------------
 
-packages = c('readr', 'dplyr', 'tidyverse', 'plyr', 'poLCA', 'reshape2', 'ggplot2',
-             'ggparallel', 'igraph', 'knitr')
+packages = c("readr", "dplyr", "tidyverse", "plyr", "poLCA", "reshape2", "ggplot2",
+             "ggparallel", "igraph", "knitr")
 for(p in packages){
     if(!require(p,character.only = T)){
         install.packages(p)
@@ -13,9 +13,9 @@ for(p in packages){
     library(p,character.only = T)
 }
 
-packages = c('readr', 'dplyr', 'tidyverse', 'plyr', 'ggstatsplot', 'ggplot2', 'ggpubr', 'corrplot',  
+packages = c("readr", "dplyr", "tidyverse", "plyr", "ggstatsplot", "ggplot2", "ggpubr", "corrplot",  
              
-             'plotly', 'ggcorrplot', 'rstantools', 'fastDummies') 
+             "plotly", "ggcorrplot", "rstantools", "fastDummies") 
 
 for(p in packages){ 
     
@@ -29,7 +29,7 @@ for(p in packages){
     
 } 
 
-#' 
+#" 
 ## -----------------------------------------------------------------------------------
 data_all <- list.files(path = "data",
                        pattern = "*.csv", full.names = TRUE) %>% 
@@ -39,7 +39,7 @@ data_all <- list.files(path = "data",
 data_cleaned2 <- data_all
 
 
-#' 
+#" 
 ## -----------------------------------------------------------------------------------
 data_cleaned2$school <- revalue(data_cleaned2$school, c("GP" = 1))
 data_cleaned2$school <- revalue(data_cleaned2$school, c("MS" = 2))
@@ -127,7 +127,7 @@ data_cleaned2$age[data_cleaned2$age > 17] <- 2
 data_cleaned2$G3[data_cleaned2$G3 <= 13] <- 1
 data_cleaned2$G3[data_cleaned2$G3 > 13] <- 2
 
-#' 
+#" 
 ## -----------------------------------------------------------------------------------
 GP_Math <- filter(data_cleaned2, school == 1 & Subject == "Math")
 GP_Math <- dplyr::select(GP_Math,c(2:3, 11:14, 16:30, 33))
@@ -141,7 +141,7 @@ MS_Math <- dplyr::select(MS_Math, c(2:3, 11:14, 16:30, 33))
 MS_Por <- filter(data_cleaned2, school == 2 & Subject == "Por")
 MS_Por <- dplyr::select(MS_Por, c(2:3, 11:14, 16:30, 33))
 
-#' ###GP_Math
+#" ###GP_Math
 ## -----------------------------------------------------------------------------------
 # define function
 f_gpmath <- with(GP_Math,cbind(sex,age,reason,guardian,traveltime,studytime,schoolsup,famsup,paid,activities,nursery,higher,internet,romantic,famrel,freetime,goout,Dalc,Walc,health,absences,G3) ~ 1) #
@@ -166,9 +166,9 @@ zp1 <- ggplot(GP_Math_lcModelProbs,
     scale_fill_discrete("Factor Level") +
     theme_bw() +
     ggtitle("Latent Clusters of GP in Math")
-print(zp1)
+zp2 <- ggplotly(zp1)
 
-#' ###GP_Por
+#" ###GP_Por
 ## -----------------------------------------------------------------------------------
 # define function
 f_gppor <- with(GP_Por,cbind(sex,age,reason,guardian,traveltime,studytime,schoolsup,famsup,paid,activities,nursery,higher,internet,romantic,famrel,freetime,goout,Dalc,Walc,health,absences,G3) ~ 1) #
@@ -185,7 +185,7 @@ GP_Por_lcModelProbs <- melt(GP_Por_LCA_best_model$probs)
 
 
 # Suggested alternative, as a possible improvement:
-zp2 <- ggplot(GP_Por_lcModelProbs,
+zp3 <- ggplot(GP_Por_lcModelProbs,
               aes(x = Var1, y = value, fill = Var2)) + 
     geom_bar(stat = "identity", position = "stack") +
     facet_wrap(~ L1) +
@@ -194,9 +194,9 @@ zp2 <- ggplot(GP_Por_lcModelProbs,
     scale_fill_discrete("Factor Level") +
     theme_bw() +
     ggtitle("Latent Clusters of GP in Portuguese")
-print(zp2)
+zp4 <- ggplotly(zp3)
 
-#' ###MS_Math
+#" ###MS_Math
 ## -----------------------------------------------------------------------------------
 # define function
 f_msmath <- with(MS_Math,cbind(sex,age,reason,guardian,traveltime,studytime,schoolsup,famsup,paid,activities,nursery,higher,internet,romantic,famrel,freetime,goout,Dalc,Walc,health,absences,G3) ~ 1) #
@@ -212,7 +212,7 @@ MS_Math_lcModelProbs <- melt(MS_Math_LCA_best_model$probs)
 
 
 # Suggested alternative, as a possible improvement:
-zp3 <- ggplot(MS_Math_lcModelProbs,
+zp5 <- ggplot(MS_Math_lcModelProbs,
               aes(x = Var1, y = value, fill = Var2)) + 
     geom_bar(stat = "identity", position = "stack") +
     facet_wrap(~ L1) +
@@ -221,9 +221,9 @@ zp3 <- ggplot(MS_Math_lcModelProbs,
     scale_fill_discrete("Factor Level") +
     theme_bw() +
     ggtitle("Latent Clusters of MS in Math")
-print(zp3)
+zp6 <- ggplotly(zp5)
 
-#' ###MS_Por
+#" ###MS_Por
 ## -----------------------------------------------------------------------------------
 # define function
 f_mspor <- with(MS_Por,cbind(sex,age,reason,guardian,traveltime,studytime,schoolsup,famsup,paid,activities,nursery,higher,internet,romantic,famrel,freetime,goout,Dalc,Walc,health,absences,G3) ~ 1) #
@@ -239,7 +239,7 @@ MS_Por_lcModelProbs <- melt(MS_Por_LCA_best_model$probs)
 
 
 # Suggested alternative, as a possible improvement:
-zp4 <- ggplot(MS_Por_lcModelProbs,
+zp7 <- ggplot(MS_Por_lcModelProbs,
               aes(x = Var1, y = value, fill = Var2)) + 
     geom_bar(stat = "identity", position = "stack") +
     facet_wrap(~ L1) +
@@ -248,7 +248,7 @@ zp4 <- ggplot(MS_Por_lcModelProbs,
     scale_fill_discrete("Factor Level") +
     theme_bw() +
     ggtitle("Latent Clusters of MS in Portuguese")
-print(zp4)
+zp8 <- ggplotly(zp7)
 
 
 
@@ -258,15 +258,15 @@ print(zp4)
 
 
 
-#' 
-#'  
-#' 
-#'  
-#' 
-#' Data Preparation and Cleaning 
-#' 
-#'  
-#' 
+#" 
+#"  
+#" 
+#"  
+#" 
+#" Data Preparation and Cleaning 
+#" 
+#"  
+#" 
 ## -----------------------------------------------------------------------------------
 
 # Import the data and combine them 
@@ -286,9 +286,9 @@ data_all <- list.files(path = "data",
 is.null(data_all) 
 
 
-#' 
-#'  
-#' 
+#" 
+#"  
+#" 
 ## -----------------------------------------------------------------------------------
 
 # Duplicate data for further manipulation 
@@ -296,9 +296,9 @@ is.null(data_all)
 data_cleaned <- data_all 
 
 
-#' 
-#'  
-#' 
+#" 
+#"  
+#" 
 ## -----------------------------------------------------------------------------------
 
 # Setting ordinal data levels 
@@ -358,11 +358,11 @@ data_cleaned$health <- factor(data_cleaned$health, order = TRUE,
 
 
 
-#' 
-#'  
-#' 
-#'  
-#' 
+#" 
+#"  
+#" 
+#"  
+#" 
 ## -----------------------------------------------------------------------------------
 
 # Creating new column for average score, then removing G1, G2 and G3 
@@ -372,9 +372,9 @@ data_cleaned$avgscore <- ((data_cleaned$G1 + data_cleaned$G2 + data_cleaned$G3)/
 data_cleaned = subset(data_cleaned, select = -c(G1, G2, G3)) 
 
 
-#' 
-#'  
-#' 
+#" 
+#"  
+#" 
 ## -----------------------------------------------------------------------------------
 
 # Split by school 
@@ -410,84 +410,84 @@ data_MS_por = subset(data_MS_por, select = -c(Subject, school))
 
 
 
-#' 
-#'  
-#' 
-#'  
-#' 
-#' CHART 1 
-#' 
-#' **Chart 1 Option A (Histogram):** 
-#' 
-#'  
-#' 
-#' + For absences, grades and age 
-#' 
-#' + Allow user to select the following: 
-#' 
-#' - For data set = data_GP_math, data_GP_por, data_MS_math, data_MS_por, data_cleaned 
-#' 
-#' - For binwidth 
-#' 
-#' - For input x 
-#' 
-#'  
-#' 
+#" 
+#"  
+#" 
+#"  
+#" 
+#" CHART 1 
+#" 
+#" **Chart 1 Option A (Histogram):** 
+#" 
+#"  
+#" 
+#" + For absences, grades and age 
+#" 
+#" + Allow user to select the following: 
+#" 
+#" - For data set = data_GP_math, data_GP_por, data_MS_math, data_MS_por, data_cleaned 
+#" 
+#" - For binwidth 
+#" 
+#" - For input x 
+#" 
+#"  
+#" 
 ## -----------------------------------------------------------------------------------
 
 
 
 
-#' 
-#'  
-#' 
-#' **Chart 1 Option B (Bar Chart):** 
-#' 
-#'  
-#' 
-#' + For all other variables except those in histogram 
-#' 
-#' + Allow user to select the following: 
-#' 
-#' - For data set = data_GP_math, data_GP_por, data_MS_math, data_MS_por, data_cleaned 
-#' 
-#' - For input x 
-#' 
-#'  
-#' 
+#" 
+#"  
+#" 
+#" **Chart 1 Option B (Bar Chart):** 
+#" 
+#"  
+#" 
+#" + For all other variables except those in histogram 
+#" 
+#" + Allow user to select the following: 
+#" 
+#" - For data set = data_GP_math, data_GP_por, data_MS_math, data_MS_por, data_cleaned 
+#" 
+#" - For input x 
+#" 
+#"  
+#" 
 ## -----------------------------------------------------------------------------------
 
 
 
-#' 
-#'  
-#' 
-#'  
-#' 
-#'  
-#' 
-#' **Chart 2 Comparison of Results** 
-#' 
-#' + For all variables except those in histogram 
-#' 
-#' + Allow user to select the following: 
-#' 
-#' - For data set = data_GP_math, data_GP_por, data_MS_math, data_MS_por, data_cleaned 
-#' 
-#' - For input x 
-#' 
-#' - For statistical test  
-#' 
-#' • "parametric" as p 
-#' 
-#' • "nonparametric" as np 
-#' 
-#' • "robust" as r 
-#' 
-#' • "bayes" as bf 
-#' 
-#'  
-#' 
+#" 
+#"  
+#" 
+#"  
+#" 
+#"  
+#" 
+#" **Chart 2 Comparison of Results** 
+#" 
+#" + For all variables except those in histogram 
+#" 
+#" + Allow user to select the following: 
+#" 
+#" - For data set = data_GP_math, data_GP_por, data_MS_math, data_MS_por, data_cleaned 
+#" 
+#" - For input x 
+#" 
+#" - For statistical test  
+#" 
+#" • "parametric" as p 
+#" 
+#" • "nonparametric" as np 
+#" 
+#" • "robust" as r 
+#" 
+#" • "bayes" as bf 
+#" 
+#"  
+#" 
 ## -----------------------------------------------------------------------------------
 
 # Attempt using ggbetweenstats 
@@ -495,15 +495,15 @@ data_MS_por = subset(data_MS_por, select = -c(Subject, school))
 
 
 
-#' 
-#'  
-#' 
-#'  
-#' 
-#' **Chart 3 Correlation** 
-#' 
-#'  
-#' 
+#" 
+#"  
+#" 
+#"  
+#" 
+#" **Chart 3 Correlation** 
+#" 
+#"  
+#" 
 ## -----------------------------------------------------------------------------------
 
 # Creating dummy variables for categorical and non-numerical data 
@@ -529,9 +529,9 @@ data_for_corr = subset(data_for_corr, select = -c(Medu, Fedu))
 data_for_corr$avgscore <- ((data_all$G1 + data_all$G2 + data_all$G3)/3) 
 
 
-#' 
-#'  
-#' 
+#" 
+#"  
+#" 
 ## -----------------------------------------------------------------------------------
 
 # Resplitting by school and subject 
@@ -563,42 +563,48 @@ data_cor_MS_por = subset(data_cor_MS_por, select = -c(SubjectPor, schoolGP, scho
 
 
 
-#' 
-#'  
-#' 
-#' Allow user to select which plot to choose, no further inputs required from user:  
-#' 
-#'  
-#' 
-#' **Static Plot** 
-#' 
-#'  
-#' 
+#" 
+#"  
+#" 
+#" Allow user to select which plot to choose, no further inputs required from user:  
+#" 
+#"  
+#" 
+#" **Static Plot** 
+#" 
+#"  
+#" 
 ## -----------------------------------------------------------------------------------
 
 
 
 
-#' 
-#'  
-#' 
-#' **Interactive Plot** 
-#' 
-#'  
-#' 
+#" 
+#"  
+#" 
+#" **Interactive Plot** 
+#" 
+#"  
+#" 
 ## -----------------------------------------------------------------------------------
 
 
 ### -----------------------------------------------------------------------------------
 # Define UI for application that draws a histogram
 ui <- navbarPage("Group 13: The Impact of Lifestyle and Family Background on Grades of High School Students",
-        theme = shinytheme("flatly"),
+        theme = shinytheme("superhero"),
         tabPanel("Introduction",
                      mainPanel(
-                         h4("In the past many years, there has been an emphasis on education around the world because of the impact it a person, be it in terms of employment opportunities and quality of life. It is hence important to know what are factors that affect one’s academic performance. While there are many factors that can impact a person’s academic performance, family background and one’s lifestyle are two of the larger factors.
-
-Since there are many sub-factors in family background and lifestyle choices, the motivation of this study is to look deeper at these sub-factors to see which are the factors that have a greater correlation in the impact on a student’s grades. More specifically, this study aims to study the correlation between each factor and a student’s grades, as well as aiming to build a model that can accurately determine the academic performance of a student. From the findings, targeted help may be administered to students in these specific areas attributing to poor grades in school, therein helping them have a higher chance of a better future.")
-                     )
+                         HTML(
+                             paste(
+                         h2("Introduction"),
+                         '<br/>',
+                         h3("In the past many years, there has been an emphasis on education around the world because of the impact it a person, be it in terms of employment opportunities and quality of life. It is hence important to know what are factors that affect one’s academic performance. While there are many factors that can impact a person’s academic performance, family background and one’s lifestyle are two of the larger factors."),
+                         '<br/>',
+                         h3("Since there are many sub-factors in family background and lifestyle choices, the motivation of this study is to look deeper at these sub-factors to see which are the factors that have a greater correlation in the impact on a student’s grades. More specifically, this study aims to study the correlation between each factor and a student’s grades, as well as aiming to build a model that can accurately determine the academic performance of a student."),
+                         '<br/>',
+                         h3("From the findings, targeted help may be administered to students in these specific areas attributing to poor grades in school, therein helping them have a higher chance of a better future.")
+                     )))
                  ),
         tabPanel("EDA",
                  tabsetPanel(
@@ -620,11 +626,11 @@ Since there are many sub-factors in family background and lifestyle choices, the
                                   selectInput(inputId = "histo_variable",
                                               label = "Choose variable:",
                                               choices = c(
-                                                  'age' = 'age',
-                                                  'absences' = 'absences',
-                                                  'avgscore' = 'avgscore'
+                                                  "Age" = "age",
+                                                  "Absences" = "absences",
+                                                  "Average Score" = "avgscore"
                                               ),
-                                              selected = 'absences')
+                                              selected = "absences")
                               ),
                               mainPanel(
                                   plotlyOutput("histogram")
@@ -642,39 +648,39 @@ Since there are many sub-factors in family background and lifestyle choices, the
                                   selectInput(inputId = "barvariable",
                                               label = "Choose variable:",
                                               choices = c(
-                                                  'Sex' = 'sex',
-                                                  'Address' = 'address',
-                                                  'Family Size' = 'famsize',
-                                                  'Parent Status' = 'Pstatus',
-                                                  'Mother Education' = 'Medu',
-                                                  'Father Education' = 'Fedu',
-                                                  'Mother Job' = 'Mjob',
-                                                  'Father Job' = 'Fjob',
-                                                  'Reason' = 'reason',
-                                                  'Guardian' = 'guardian',
-                                                  'Travel Time' = 'traveltime',
-                                                  'Study Time' = 'studytime',
-                                                  'Failures' = 'failures',
-                                                  'School Support' = 'schoolsup',
-                                                  'Family Support' = 'famsup',
-                                                  'Paid' = 'paid',
-                                                  'Activities' = 'activities',
-                                                  'Nursery' = 'nursery',
-                                                  'Higher Education' = 'higher',
-                                                  'Internet' = 'internet',
-                                                  'Romantic' = 'romantic',
-                                                  'Family Relation' = 'famrel',
-                                                  'Free Time' = 'freetime',
-                                                  'Go Out' = 'goout',
-                                                  'Daily Alcohol' = 'Dalc',
-                                                  'Weekend Alcohol' = 'Walc',
-                                                  'Health' = 'health'
+                                                  "Sex" = "sex",
+                                                  "Address" = "address",
+                                                  "Family Size" = "famsize",
+                                                  "Parent Status" = "Pstatus",
+                                                  "Mother Education" = "Medu",
+                                                  "Father Education" = "Fedu",
+                                                  "Mother Job" = "Mjob",
+                                                  "Father Job" = "Fjob",
+                                                  "Reason" = "reason",
+                                                  "Guardian" = "guardian",
+                                                  "Travel Time" = "traveltime",
+                                                  "Study Time" = "studytime",
+                                                  "Failures" = "failures",
+                                                  "School Support" = "schoolsup",
+                                                  "Family Support" = "famsup",
+                                                  "Paid" = "paid",
+                                                  "Activities" = "activities",
+                                                  "Nursery" = "nursery",
+                                                  "Higher Education" = "higher",
+                                                  "Internet" = "internet",
+                                                  "Romantic" = "romantic",
+                                                  "Family Relation" = "famrel",
+                                                  "Free Time" = "freetime",
+                                                  "Go Out" = "goout",
+                                                  "Daily Alcohol" = "Dalc",
+                                                  "Weekend Alcohol" = "Walc",
+                                                  "Health" = "health"
                                               ),
-                                              selected = 'Sex')
+                                              selected = "Sex")
                                   
                               ),
                               mainPanel(
-                                  plotOutput("barchart")
+                                  plotlyOutput("barchart")
                               )),
                      tabPanel("Betweenstats",
                               sidebarPanel(
@@ -687,41 +693,93 @@ Since there are many sub-factors in family background and lifestyle choices, the
                                                           "All"),
                                               selected = "All"),
                                   selectInput(inputId = "betvariable",
-                                              label = "Choose variable against average score:",
+                                              label = "Choose variable:",
                                               choices = c(
-                                                  "sex",
-                                                  "address"
+                                                  "Sex" = "sex",
+                                                  "Address" = "address",
+                                                  "Family Size" = "famsize",
+                                                  "Parent Status" = "Pstatus",
+                                                  "Mother Education" = "Medu",
+                                                  "Father Education" = "Fedu",
+                                                  "Mother Job" = "Mjob",
+                                                  "Father Job" = "Fjob",
+                                                  "Reason" = "reason",
+                                                  "Guardian" = "guardian",
+                                                  "Travel Time" = "traveltime",
+                                                  "Study Time" = "studytime",
+                                                  "Failures" = "failures",
+                                                  "School Support" = "schoolsup",
+                                                  "Family Support" = "famsup",
+                                                  "Paid" = "paid",
+                                                  "Activities" = "activities",
+                                                  "Nursery" = "nursery",
+                                                  "Higher Education" = "higher",
+                                                  "Internet" = "internet",
+                                                  "Romantic" = "romantic",
+                                                  "Family Relation" = "famrel",
+                                                  "Free Time" = "freetime",
+                                                  "Go Out" = "goout",
+                                                  "Daily Alcohol" = "Dalc",
+                                                  "Weekend Alcohol" = "Walc",
+                                                  "Health" = "health"
                                               ),
-                                              selected = "sex"),
-                                  selectInput(inputId = 'betmethod',
-                                              label = 'Choose calculation method:',
+                                              selected = "Sex"),
+                                  selectInput(inputId = "betmethod",
+                                              label = "Choose calculation method:",
                                               choices = c(
-                                                  'parametric' = 'p',
-                                                  'nonparametric' = 'np',
-                                                  'robust' = 'r',
-                                                  'bayes' = 'bf'
+                                                  "parametric" = "p",
+                                                  "nonparametric" = "np",
+                                                  "robust" = "r",
+                                                  "bayes" = "bf"
                                               ),
-                                              selected = 'parametric')
+                                              selected = "parametric")
                                   
                               ),
                               mainPanel(
-                                  plotOutput("betchart")
+                                  plotlyOutput("betchart")
                               )
                               ),
                      tabPanel("Correlation",
                               sidebarPanel(
                                   selectInput(inputId = "selectedcorplot",
                                               label = "Choose correlation plot:",
-                                              choices = c('Static Plot',
-                                                          'Interactive Plot'),
-                                              selected = 'Interactive Plot')
+                                              choices = c("Static Plot",
+                                                          "Interactive Plot"),
+                                              selected = "Interactive Plot")
                               ),
                               mainPanel(
                                   plotlyOutput("corplot")
                               )
                               ),
                               
-                     tabPanel("Usage")
+                     tabPanel("Usage",
+                              mainPanel(
+                                  HTML(
+                                      paste(
+                                  h2("1. Histogram"),'<br/>',
+                                  h4("A histogram is a graphical display of data using bars of different heights. In a histogram, each bar groups numbers into ranges. Taller bars show that more data falls in that range. A histogram displays the shape and spread of continuous sample data."),'<br/>',
+                                  h4("Instruction:"),'<br/>',
+                                  h4("1. Choose school and subject."),'<br/>',
+                                  h4("2. Choose binwidth. A binwidth refers to the number of the bins you want to show."),'<br/>',
+                                  h4("3. Choose which varibale you want to view."),'<br/>',
+                                  h2("2. Bar chart"),'<br/>',
+                                  h4("A bar chart or bar graph is a chart or graph that presents categorical data with rectangular bars with heights or lengths proportional to the values that they represent."),'<br/>',
+                                  h4("Instruction:"),'<br/>',
+                                  h4("1. Choose school and subject."),'<br/>',
+                                  h4("2. Choose which variable you want to explore its distribution and propotion."),'<br/>',
+                                  h2("3. Betweenstats"),'<br/>',
+                                  h4("A combination of box and violin plots along with jittered data points for between-subjects designs with statistical details included in the plot as a subtitle."),'<br/>',
+                                  h4("Instruction:"),'<br/>',
+                                  h4("1. Choose school and subject."),'<br/>',
+                                  h4("2. Choose varibales you want to compare under average score."),'<br/>',
+                                  h4("3. Choose calculation method."),'<br/>',
+                                  h2("4. Correaltion"),'<br/>',
+                                  h4("In statistics, correlation or dependence is any statistical relationship, whether causal or not, between two random variables or bivariate data."),'<br/>',
+                                  h4("Instruction:"),'<br/>',
+                                  h4("The Interactive correlation mat allows viewers to select which two variables they are interested in by putting the mouse on the corresponding position."),'<br/>',
+                                  h4("Also viewers can zoom in or out, and other functions provided by plotly."),'<br/>','<br/>'
+                                      ))
+                              ))
                  )
         ),
         tabPanel("Latent Clustering",
@@ -739,10 +797,22 @@ Since there are many sub-factors in family background and lifestyle choices, the
                     tabsetPanel(
                     tabPanel(
                         title = "Plot",
-                        plotOutput("clusterplot")
+                        plotlyOutput("clusterplot")
                     ),
                     tabPanel(
-                        title = "Usage"
+                        title = "Usage",
+                        mainPanel(
+                            HTML(
+                                paste(
+                                    h4("In statistics, a latent class model (LCM) relates a set of observed (usually discrete) multivariate variables to a set of latent variables. It is a type of latent variable model. It is called a latent class model because the latent variable is discrete. A class is characterized by a pattern of conditional probabilities that indicate the chance that variables take on certain values."),
+                                    '<br/>',
+                                    '<br/>',
+                                    h4("In our project, LCM visualization reveals the shared pattern of lifestyle choices and family background of students that belong to the same cluster."),
+                                    '<br/>',
+                                    h4("Through this viewers are able to fetch the information about how these two major factors impact on students grade.")
+                                )
+                            )
+                        )
                     )
                 )
                 
@@ -769,55 +839,51 @@ server <- function(input, output) {
             if(input$histo_data == "MS & Math"){data_histogram<-data_MS_math}
             if(input$histo_data == "MS & Portuguese"){data_histogram<-data_MS_por}
             if(input$histo_data == "All"){data_histogram<-data_cleaned}
-            histo <- ggplot(data_histogram) + 
-                        aes(x = absences) + 
-                        geom_histogram(binwidth=input$binwidth, color="black", fill="light blue") + 
+            x <- unlist(data_histogram[,input$histo_variable])
+            histo <- ggplot(data_histogram, aes(x)) + 
+                        geom_histogram(bins=input$binwidth, color="black", fill="light blue") + 
                         ggtitle("Distribution and Proportion of Variables") + 
                         theme(axis.title.x = element_blank()) 
             
             ggplotly(histo)
         })
         
-        output$barchart <- renderPlot({
+        output$barchart <- renderPlotly({
             if(input$bar_data == "GP & Math"){data_bar<-data_GP_math}
             if(input$bar_data == "GP & Portuguese"){data_bar<-data_GP_por}
             if(input$bar_data == "MS & Math"){data_bar<-data_MS_math}
             if(input$bar_data == "MS & Portuguese"){data_bar<-data_MS_por}
             if(input$bar_data == "All"){data_bar<-data_cleaned}
+            x <- unlist(data_bar[,input$barvariable])
             ggplot(data_bar) + 
-                
-                aes(x = input$barvariable, fill = input$barvariable) + 
-                
-                geom_bar(aes(x = input$barvariable, fill = input$barvariable), color = "black", alpha = 0.5) + 
-                
+                aes(x = x, fill = x) + 
+                geom_bar(aes(x = x, fill = x), color = "black", alpha = 0.5) + 
                 geom_text(aes(label = scales::percent(..prop..), group = 1, y= ..prop.. ), stat= "count", vjust = -1.5) + 
-                
                 ggtitle("Distribution and Proportion of Variables") + 
-                
                 theme(axis.title.x = element_blank()) 
         })
         
-        output$betchart <- renderPlot({
+        output$betchart <- renderPlotly({
             if(input$bet_data == "GP & Math"){data_bet<-data_GP_math}
             if(input$bet_data == "GP & Portuguese"){data_bet<-data_GP_por}
             if(input$bet_data == "MS & Math"){data_bet<-data_MS_math}
             if(input$bet_data == "MS & Portuguese"){data_bet<-data_MS_por}
             if(input$bet_data == "All"){data_bet<-data_cleaned}
-            ggbetweenstats( 
-                
-                data = data_bet, 
-                
-                x = sex, 
-                
-                y = avgscore, 
-                
-                results.subtitle = TRUE, 
-                
-                bf.message = FALSE, 
-                
-                type = input$betmethod, 
-                
-                title = "Comparison of Variables Against Average Score") 
+                ggbetweenstats( 
+                    
+                    data = data_bet, 
+                    
+                    x = sex, 
+                    
+                    y = avgscore, 
+                    
+                    results.subtitle = TRUE, 
+                    
+                    bf.message = FALSE, 
+                    
+                    type = "p", 
+                    
+                    title = "Comparison of Variables Against Average Score") 
         })
         
         output$corplot <- renderPlotly({
@@ -859,11 +925,11 @@ server <- function(input, output) {
             }
         })
         
-        output$clusterplot <- renderPlot({
-            if (input$data_source == "GP & Math") return(zp1)
-            if (input$data_source == "GP & Portuguese") return(zp2)
-            if (input$data_source == "MS & Math") return(zp3) 
-            if (input$data_source == "MS & Portuguese") return(zp4)
+        output$clusterplot <- renderPlotly({
+            if (input$data_source == "GP & Math") return(zp2)
+            if (input$data_source == "GP & Portuguese") return(zp4)
+            if (input$data_source == "MS & Math") return(zp6) 
+            if (input$data_source == "MS & Portuguese") return(zp8)
         })
 }
 

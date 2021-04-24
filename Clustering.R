@@ -145,8 +145,7 @@ zp1 <- ggplot(GP_Math_lcModelProbs,
   scale_fill_discrete("Factor Level") +
   theme_bw() +
   ggtitle("Latent Clusters of GP in Math")
-print(zp1)
-
+ggplotly(zp1)
 #' ###GP_Por
 ## -----------------------------------------------------------------------------------
 # define function
@@ -173,7 +172,7 @@ zp2 <- ggplot(GP_Por_lcModelProbs,
   scale_fill_discrete("Factor Level") +
   theme_bw() +
   ggtitle("Latent Clusters of GP in Portuguese")
-print(zp2)
+ggplotly(zp2)
 
 #' ###MS_Math
 ## -----------------------------------------------------------------------------------
@@ -200,7 +199,7 @@ zp3 <- ggplot(MS_Math_lcModelProbs,
   scale_fill_discrete("Factor Level") +
   theme_bw() +
   ggtitle("Latent Clusters of MS in Math")
-print(zp3)
+ggplotly(zp3)
 
 #' ###MS_Por
 ## -----------------------------------------------------------------------------------
@@ -227,5 +226,5 @@ zp4 <- ggplot(MS_Por_lcModelProbs,
   scale_fill_discrete("Factor Level") +
   theme_bw() +
   ggtitle("Latent Clusters of MS in Portuguese")
-print(zp4)
+ggplotly(zp4)
  
