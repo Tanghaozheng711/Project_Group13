@@ -41,10 +41,7 @@ Our project sets out to firstly provide an interactive data visualization applic
 
 Using R, we first performed data wrangling to import the raw data into R. Then, categorical data were transformed into multiple dummy binary data, while data type for ordinal data were set as ordinal. We also split the data by school and subject, to remove the variability in grades due to these variables.
 
-Exploratory analysis was performed to firstly explore the data set, then clustering analysis was done to group similar data sets together. 
-
-
-
+Exploratory analysis was performed to firstly explore the data set in terms of proportions and distributions within each variable. Then, clustering analysis was done to group similar data sets together to look at which students are similar in terms of their demographics. Subsequently these clusters were compared against each other within individual variables to study the differences between these groups. Finally, predictive analysis was performed to identify variables that have significant impact to a student's grades.
 
 # Exploratory Data Analysis
 **Bar Chart/Histogram:** The bar chart and histogram chart is used to visualize the distribution and proportions of each variable in the data set, where the user is able to select the data set as well as the variable to explore.
@@ -57,7 +54,7 @@ knitr::include_graphics("barchart.png")
 knitr::include_graphics("barchart.png")
 ```
 
-**Correlation Chart:** The correlation plot gives the user an overview of the correlations between each variable, including the average grade where positive and negative correlation are indicated by blue and red respectively. Here, the user can select a static plot or an interactive plot, which the user is able view the correlation value by hovering the cursor over the specific cell. 
+**Correlation Chart:** The correlation plot gives the user an overview of the correlations between each variable, including the average grade where positive and negative correlation are indicated by blue and red respectively. Here, the user can select a static plot or an interactive plot, where the user is able view the correlation value by hovering the cursor over the specific cell. 
 
 # Cluster Analysis
 
@@ -78,12 +75,7 @@ In cluster analysis, the aim is to group all the data points into smaller groups
 Welcome to `posterdown` ! This is my attempt to provide a semi-smooth workflow for those who wish to take their R Markdown skills to the conference world. Most features from R Markdown are available in this package such as Markdown section notation, figure captioning, and even citations like this one [@R-rmarkdown]. The rest of this example poster will show how you can insert typical conference poster features into your own document. 
 
 
-# Conclusion
-
-Try `posterdown` out! Hopefully you like it!
-
 ```{r, include=FALSE}
 knitr::write_bib(c('knitr','rmarkdown','posterdown','pagedown'), 'packages.bib')
 ```
 
-# References
