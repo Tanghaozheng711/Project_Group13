@@ -1,0 +1,89 @@
+---
+title: An Interactive Application To Discover The Impact of Lifestyle and Family Background on Grades
+author:
+  - name: Timothy Lim
+  - name: Tang Haozheng
+  - name: Wu Yufeng
+
+column_numbers: 3
+logoright_name: "smu1.png"
+output: 
+  posterdown::posterdown_html:
+    self_contained: false
+bibliography: packages.bib
+poster_height: 33.11in
+poster_width: 23.39in
+body_textsize: 35px
+title_textsize: 60px
+author_textsize: 40px
+sectitle_textsize: 50px
+sectitle2_textsize: 40px
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+Approach - A description of the techniques or algorithms you used to solve the problem.
+Results - Screenshots and a working demo of the system you built.
+Future Work - An explanation of how the work could be extended.
+
+# Introduction
+Education has a significant impact on a person, be it in terms of employment opportunities and quality of life. It is hence important to know what are factors that affect one’s academic performance. While there are many factors that can impact a person’s academic performance, family background and one’s lifestyle are two of the larger factors. While there are studies on the correlation between lifestyle and grades, data visualization and interactivity are mostly left out from these studies. 
+
+# Objective/Motivation
+
+Our project sets out to firstly provide an interactive data visualization application that provides data visualization and interactivity where users are able to explore the data in a deeper way, rather than to only see the final result. Secondly, utilizing this application, we aim to identify which variables in a data set impacts grades. 
+
+# Approach/Methodology
+
+Using R, we first performed data wrangling to import the raw data into R. Then, categorical data were transformed into multiple dummy binary data, while data type for ordinal data were set as ordinal. We also split the data by school and subject, to remove the variability in grades due to these variables.
+
+Exploratory analysis was performed to firstly explore the data set, then clustering analysis was done to group similar data sets together. 
+
+
+
+
+# Exploratory Data Analysis
+**Bar Chart/Histogram:** The bar chart and histogram chart is used to visualize the distribution and proportions of each variable in the data set, where the user is able to select the data set as well as the variable to explore.
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', fig.align='center', fig.cap='Great figure!'}
+knitr::include_graphics("barchart.png")
+```
+
+**Violin Chart:** The violin chart provides the user with the distribution and the mean grades for each of the inputs in each variable selected. The chart also provides comparisons between the inputs, where if there is a significant difference in grades, the p-value will be shown. 
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', fig.align='center', fig.cap='Great figure!'}
+knitr::include_graphics("barchart.png")
+```
+
+**Correlation Chart:** The correlation plot gives the user an overview of the correlations between each variable, including the average grade where positive and negative correlation are indicated by blue and red respectively. Here, the user can select a static plot or an interactive plot, which the user is able view the correlation value by hovering the cursor over the specific cell. 
+
+# Cluster Analysis
+
+In cluster analysis, the aim is to group all the data points into smaller groups based on their traits, which are given by the individual inputs for each variable. 
+
+# Predictive Modeling
+
+# Findings
+
+# Future Work
+
+- Including a function to compare distributions or proportions between variables could be added to further explore the different variables in the data set
+
+- Exploring more methods of analysis, for example latent class analysis for clustering analysis will be useful in comparing results from different methods
+
+- 
+
+Welcome to `posterdown` ! This is my attempt to provide a semi-smooth workflow for those who wish to take their R Markdown skills to the conference world. Most features from R Markdown are available in this package such as Markdown section notation, figure captioning, and even citations like this one [@R-rmarkdown]. The rest of this example poster will show how you can insert typical conference poster features into your own document. 
+
+
+# Conclusion
+
+Try `posterdown` out! Hopefully you like it!
+
+```{r, include=FALSE}
+knitr::write_bib(c('knitr','rmarkdown','posterdown','pagedown'), 'packages.bib')
+```
+
+# References
