@@ -1,0 +1,200 @@
+---
+title: Interactive Application To Explore Impact of Lifestyle and Family Background on Grades
+author:
+  - name: Tang Haozheng, Timothy Lim, Wu Yufeng
+    affiliation: Singapore Management Institute, Singapore
+  
+abstract: |
+  With the constant emphasis of education and the impact it has on a person, there is hence important to know what affects a student's grades. In this paper, with the focus on lifestyle and family background of a student, we aim to identify which factors have an impact on a student's grades. This will be done through developing an application on R Shiny that will serve as a platform to perform exploratory data analysis, clustering analysis and predictive analysis which will have elements of interactivity for users to explore the data set at a deeper level. These tools will then be used to determine the factors that have a significant impact on grades.
+
+bibliography: sigproc.bib
+csl: acm-sig-proceedings.csl
+output: rticles::acm_article
+---
+
+# Introduction 
+In the past many years, there has been an emphasis on education around the world because of the impact it has on a person, be it in terms of employment opportunities and quality of life. It is hence important to know what are factors that affect one’s academic performance. While there are many factors that can impact a person’s academic performance, family background and one’s lifestyle are two of the larger factors.
+
+Since there are many sub-factors in family background and lifestyle choices, the motivation of this study is to look deeper at these sub-factors to see which are the factors that have a greater correlation in the impact on a student’s grades. More specifically, this study aims to study the correlation between each factor and a student’s grades, as well as aiming to build a model that can accurately determine the academic performance of a student. From the findings, targeted help may be administered to students in these specific areas attributing to poor grades in school, therein helping them have a higher chance of a better future.
+
+# Motivation and Objectives
+Despite similar studies on the impact of lifestyle and family demographics on grades being done in past works, there is a general lack firstly a visualization of the data set where the data is mostly discussed through words and numbers. 
+
+Our work was hence motivated by the absence of data visualization and interactivity of variables identified for analysis in the impact it has on student grades. To fill this gap, our goal is to create an application that allows users to be able to not just see the final results of which variable has the highest impact on grades, but to allow the exploration of the data set in an interactive way, to have a better sense of the data set, as well as to compare the impact between each variable.
+
+The application will include the following features in order to fulfill the above objectives:
+
+1) To provide data exploration through bar charts and histograms to study the distributions and proportions of each variable 
+
+2) To provide clustering analysis of the data points to see which students are similar in terms of the surveyed variables
+
+3) To perform predict analysis to identify which variables or a combination of variables have a significant impact on a student's academic performance
+
+4) To provide interactive functions to perform data exploration
+
+to mention:
+statistical results
+
+# Literature Review
+
+Through performing a literature review, we found various studies that explore how one's lifestyle affects a student's academic performance. However, as lifestyle being such a generic term, many variables can be considered lifestyle. As such, majority of these studies focus on physical activity and eating habits which are not variables in our study. However, similar studies can be found for research on the impact of family background on academic performance. 
+
+From the review on the studies we went through, it was observed that these either only provided tabular data on the data set, or basic charts for data visualization. Most studies also do not provide much exploration of the data set.
+
+https://link.springer.com/content/pdf/10.1186/s40711-018-0083-8.pdf
+https://www.brookings.edu/research/how-life-outside-of-a-school-affects-student-performance-in-school/
+
+# Design Framework
+
+A detail description of the design principles used and data visualisation elements built 
+
+The application will allow users to review three main types of analysis - exploratory and confirmatory data analysis, clustering analysis and predictive modeling. These being the main analysis types will be split by a separate tab in the application. Within each of these analysis types will involve different charts, which will include some functions of interactivity to allow the user to explore the data further. 
+
+In designing the individual charts, we first look at the analysis to be performed, then choose the appropriate chart type for visualization. 
+
+In exploratory data analysis, three charts will be utilized. Firstly, for the purpose of reviewing the distribution and proportions of each variable, a bar chart was used where the percentage proportions were included in the charts for clarity in cases where the proportions are similar. Secondly, to compare inputs between each variable against the average grade, the violin chart was used, with an overlay of the box plot. 
+
+
+For example, a simple bar chart will be able to fulfill . Then, we look at how we can involve elements of interactivity, which will allow the user to choose different inputs, for example the variable, for further exploration. The demonstration of using each chart will be discussed below. 
+
+
+# Data Preparation
+
+All data preparation was performed using R. The data set used in this study was taken from [Kaggle](https://www.kaggle.com/uciml/student-alcohol-consumption), which contains two csv files, student-mat.csv and student-por.csv. The data was obtained from a survey of Portuguese students aged 15 to 22 on family demographics, lifestyle factors, along with their grades in mathematics and Portuguese language. The data set contains other variables that can be broadly classified into family demographics and lifestyle factors. 
+
+Below are the variables included in the data set:
+
+- Student's school
+- Student's sex
+- Student's age
+- Student's home address type
+- Family size
+- Parent's cohabitation status
+- Mother's education
+- Father's education
+- Mother's job
+- Father's job
+- Reason in choosing this school
+- Student's guardian
+- Home to school travel time
+- Weekly study time
+- Number of past class failures
+- Extra education support
+- Family educational support
+- Extra paid classes within course subject
+- Extra-curricular activities
+- Attended nursery school
+- Wants to take higher education
+- Internet access at home
+- In a romantic relationship
+- Quality of family relationships
+- Free time after school
+- Going out with friends
+- Workday alchohol consumption
+- Weekend alcohol consumption
+- Current health status
+- Number of school absences
+- First period grade
+- Second period grade
+- Final grade
+
+Further data cleaning and manipulation was done, including splitting the data set by school and subject taken, as well as having a new variable average grade, which will be used as the target variable.
+
+# The Application
+
+## Exploratory Data Analysis
+
+### Distribution and Proportions
+
+The bar chart and histogram will be used for users to see the distribution of proportions within each variable. This gives a clear breakdown and proportion of the inputs in each variable. Nominal data variables will utilize this bar chart, where the percentage proportion will be indicated so that comparisons can be done not out of estimation, but with clear data. Here, the user is able to firstly select which data set he or she wishes to study further, then the variable to review can be selected next. 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', fig.align='center', fig.cap='Bar Chart', fig.height=4}
+knitr::include_graphics("barchart.png")
+```
+
+As for the histogram, it will be used for the variables with a larger range. Due to larger range, the user is able to change the number of bins on top of selecting the data set and the variable. The histogram will also be interactive in a way where the user is able to hover the cursor over the data point to see the count.
+
+INSERT PICTURE
+
+### Comparison of Results
+
+The violin graph is the chart the user is able to use for comparing the difference between each variable with respect to the average grade. From the chart, besides having the boxplot where the user is able to see the upper quartiles, lower quartiles and mean, the user is able to see the distribution of grades through the width of the violin graph. The chart also provides statistical indications, where if any two inputs are significantly different in the results, the p-value will be shown. The user is able to select the data set to review as well as the specific variable to study compare. 
+
+INSERT PICTURE
+
+### Correlation
+
+For reviewing the correlation, the user is able to select one of two charts. The first chart is static where no interactivity is implemented. This chart is to give the user a broad overview of the correlations between each variable, with average score being at the bottom left. The correlations are presented through coloured ellipses, where red indicates a negative correlation while blue indicates a positive correlation, with the degree of correlation indicated by the gradient of colour. 
+
+The other plot that the user can look at is one with interactivity. This allows the user to hover the cursor over each box, where a tool tip will appear, indicating the two participating variables as well as the correlation value. This allows the user to see specific correlation values between variables. Similar to the static correlation chart, the correlation value is indicated by the colour and gradient. 
+
+## Cluster Analysis
+
+### Dendrogram and Heatmap
+
+In cluster analysis, the aim is to group all the data points into smaller groups based on their traits, which are given by the individual inputs for each variable. From here, the user is able to explore and see which students are similar in terms of their demographics. In this section, a dendrogram along with a heatmap can be studied. Each row in the heatmap represents one data point, or in this case one student, and they are arranged based on the inputs of each variables by clustering them together. The clusters created can be observed from the right of the chart, indicated by the different colours. 
+
+In terms of interactivity, the user is able to select the data set for reviewing, then from the heatmap and dendrogram generated, hovering the cursor over each cell will show the details of each cell, and zooming in can be done by dragging out a rectangle. 
+
+INSERT TWO PICTURES
+
+### Comparison of Clusters
+
+Below the dendrogram and heatmap, a series of violin charts with boxplots will be presented. This chart allows the user to see the distribution of grade scores for each variable, sorted by the inputs from each cluster formed previously. From the chart, the user will be able to compare the grades obtained by students based on which cluster they are in for each input. The user will be able to select the data set to be studied as well as the variable to explore. 
+
+## Predictive Modeling
+
+For predictive modeling, 
+
+The user is firstly able to select
+
+# Conclusion and Future Work
+
+Being able to demonstrate the data visualization and implementation of interactivity within the application allows users to further explore data sets in a deeper way. Beyond just knowing what impacts a student's grades, the user is able to explore the demographics of the students as well as to study certain groups of students. 
+
+Although our application was able to pick out some of the more significant variables, the results are not as ideal as we wanted. Hence, further work could be done to firstly implement and compare other methods of analysis and modeling, and secondly to have a larger data set to obtain more accurate results. Another function where users can input their own data sets would be useful, to allow this application to be applicable to any user who has a data set that they would like to explore and perform analysis on. 
+
+## Acknowledgements
+
+The authors would like to thank Prof. Kam Tin Seong for his guidance and support in the completion of this project. 
+
+# References
+
+---
+references:
+- id: meier2012
+  title: Professinal Android 4 Application Development
+  author: 
+  - family: Meier
+    given: Reto
+  type: book
+  publisher: John Wiley & Sons, Inc.
+  issued:
+    year: 2012
+    month: 5
+- id: fenner2012a
+  title: One-click science marketing
+  author:
+  - family: Fenner
+    given: Martin
+  container-title: Nature Materials
+  volume: 11
+  URL: 'https://doi.org/10.1038/nmat3283'
+  DOI: 10.1038/nmat3283
+  issue: 4
+  publisher: Nature Publishing Group
+  page: 261-263
+  type: article-journal
+  issued:
+    year: 2012
+    month: 3
+...
+
+Appendix:
+
+metadata
+
+
+
+
+
