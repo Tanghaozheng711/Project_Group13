@@ -1,3 +1,9 @@
+
+#' 
+## -----------------------------------------------------------------------------------
+
+# Load packages 
+
 packages = c('readr', 'dplyr', 'tidyverse', 'plyr', 'ggstatsplot', 'ggplot2', 'ggpubr', 'corrplot',  
              
              'plotly', 'ggcorrplot', 'rstantools', 'fastDummies') 
@@ -15,16 +21,16 @@ for(p in packages){
 } 
 
 
-
-
-
-
-
-
-
-
-
-
+#' 
+#'  
+#' 
+#'  
+#' 
+#' Data Preparation and Cleaning 
+#' 
+#'  
+#' 
+## -----------------------------------------------------------------------------------
 
 # Import the data and combine them 
 
@@ -43,19 +49,20 @@ data_all <- list.files(path = "data",
 is.null(data_all) 
 
 
-
-
-
-
+#' 
+#'  
+#' 
+## -----------------------------------------------------------------------------------
 
 # Duplicate data for further manipulation 
 
 data_cleaned <- data_all 
 
 
-
-
-
+#' 
+#'  
+#' 
+## -----------------------------------------------------------------------------------
 
 # Setting ordinal data levels 
 
@@ -114,11 +121,12 @@ data_cleaned$health <- factor(data_cleaned$health, order = TRUE,
 
 
 
-
-
-
-
-
+#' 
+#'  
+#' 
+#'  
+#' 
+## -----------------------------------------------------------------------------------
 
 # Creating new column for average score, then removing G1, G2 and G3 
 
@@ -127,10 +135,10 @@ data_cleaned$avgscore <- ((data_cleaned$G1 + data_cleaned$G2 + data_cleaned$G3)/
 data_cleaned = subset(data_cleaned, select = -c(G1, G2, G3)) 
 
 
-
-
-
-
+#' 
+#'  
+#' 
+## -----------------------------------------------------------------------------------
 
 # Split by school 
 
@@ -165,33 +173,34 @@ data_MS_por = subset(data_MS_por, select = -c(Subject, school))
 
 
 
-
-
-
-
-CHART 1 
-
-**Chart 1 Option A (Histogram):** 
-  
-  
-  
-  + For absences, grades and age 
-
-+ Allow user to select the following: 
-  
-  - For data set = data_GP_math, data_GP_por, data_MS_math, data_MS_por, data_cleaned 
-
-- For binwidth 
-
-- For input x 
-
-
-
-
+#' 
+#'  
+#' 
+#'  
+#' 
+#' CHART 1 
+#' 
+#' **Chart 1 Option A (Histogram):** 
+#' 
+#'  
+#' 
+#' + For absences, grades and age 
+#' 
+#' + Allow user to select the following: 
+#' 
+#' - For data set = data_GP_math, data_GP_por, data_MS_math, data_MS_por, data_cleaned 
+#' 
+#' - For binwidth 
+#' 
+#' - For input x 
+#' 
+#'  
+#' 
+## -----------------------------------------------------------------------------------
 
 histo <- ggplot(data_GP_math) + 
   
-  aes(x = absences) + 
+  aes(x = age) + 
   
   geom_histogram(binwidth=1, color="black", fill="light blue") + 
   
@@ -204,30 +213,30 @@ histo <- ggplot(data_GP_math) +
 ggplotly(histo) 
 
 
-
-
-
-**Chart 1 Option B (Bar Chart):** 
-  
-  
-  
-  + For all other variables except those in histogram 
-
-+ Allow user to select the following: 
-  
-  - For data set = data_GP_math, data_GP_por, data_MS_math, data_MS_por, data_cleaned 
-
-- For input x 
-
-
-
-
+#' 
+#'  
+#' 
+#' **Chart 1 Option B (Bar Chart):** 
+#' 
+#'  
+#' 
+#' + For all other variables except those in histogram 
+#' 
+#' + Allow user to select the following: 
+#' 
+#' - For data set = data_GP_math, data_GP_por, data_MS_math, data_MS_por, data_cleaned 
+#' 
+#' - For input x 
+#' 
+#'  
+#' 
+## -----------------------------------------------------------------------------------
 
 ggplot(data_GP_math) + 
   
-  aes(x = Mjob, fill = Mjob) + 
+  aes(x = sex, fill = sex) + 
   
-  geom_bar(aes(x = Mjob, fill = Mjob), color = "black", alpha = 0.5) + 
+  geom_bar(aes(x = sex, fill = sex), color = "black", alpha = 0.5) + 
   
   geom_text(aes(label = scales::percent(..prop..), group = 1, y= ..prop.. ), stat= "count", vjust = -1.5) + 
   
@@ -236,35 +245,36 @@ ggplot(data_GP_math) +
   theme(axis.title.x = element_blank()) 
 
 
-
-
-
-
-
-
-**Chart 2 Comparison of Results** 
-  
-  + For all variables except those in histogram 
-
-+ Allow user to select the following: 
-  
-  - For data set = data_GP_math, data_GP_por, data_MS_math, data_MS_por, data_cleaned 
-
-- For input x 
-
-- For statistical test  
-
-• "parametric" as p 
-
-• "nonparametric" as np 
-
-• "robust" as r 
-
-• "bayes" as bf 
-
-
-
-
+#' 
+#'  
+#' 
+#'  
+#' 
+#'  
+#' 
+#' **Chart 2 Comparison of Results** 
+#' 
+#' + For all variables except those in histogram 
+#' 
+#' + Allow user to select the following: 
+#' 
+#' - For data set = data_GP_math, data_GP_por, data_MS_math, data_MS_por, data_cleaned 
+#' 
+#' - For input x 
+#' 
+#' - For statistical test  
+#' 
+#' • "parametric" as p 
+#' 
+#' • "nonparametric" as np 
+#' 
+#' • "robust" as r 
+#' 
+#' • "bayes" as bf 
+#' 
+#'  
+#' 
+## -----------------------------------------------------------------------------------
 
 # Attempt using ggbetweenstats 
 
@@ -285,14 +295,16 @@ ggbetweenstats(
   title = "Comparison of Variables Against Average Score") 
 
 
-
-
-
-
-**Chart 3 Correlation** 
-  
-  
-
+#' 
+#'  
+#' 
+#'  
+#' 
+#' **Chart 3 Correlation** 
+#' 
+#'  
+#' 
+## -----------------------------------------------------------------------------------
 
 # Creating dummy variables for categorical and non-numerical data 
 
@@ -317,6 +329,10 @@ data_for_corr = subset(data_for_corr, select = -c(Medu, Fedu))
 data_for_corr$avgscore <- ((data_all$G1 + data_all$G2 + data_all$G3)/3) 
 
 
+#' 
+#'  
+#' 
+## -----------------------------------------------------------------------------------
 
 # Resplitting by school and subject 
 
@@ -347,14 +363,18 @@ data_cor_MS_por = subset(data_cor_MS_por, select = -c(SubjectPor, schoolGP, scho
 
 
 
-Allow user to select which plot to choose, no further inputs required from user:  
-  
-  
-  
-  **Static Plot** 
-  
-  
-
+#' 
+#'  
+#' 
+#' Allow user to select which plot to choose, no further inputs required from user:  
+#' 
+#'  
+#' 
+#' **Static Plot** 
+#' 
+#'  
+#' 
+## -----------------------------------------------------------------------------------
 
 data.cor = cor(data_cor_GP_math) 
 
@@ -371,14 +391,14 @@ static_corr <- corrplot(data.cor,
                         tl.cex=0.7) 
 
 
-
-
-
-**Interactive Plot** 
-  
-  
-  
-
+#' 
+#'  
+#' 
+#' **Interactive Plot** 
+#' 
+#'  
+#' 
+## -----------------------------------------------------------------------------------
 
 p.mat <- cor_pmat(data_cor_GP_por) 
 
@@ -401,3 +421,5 @@ interactive_cor <- ggplotly(corr.plot)
 
 
 interactive_cor 
+
+
