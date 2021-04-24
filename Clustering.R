@@ -1,3 +1,4 @@
+
 packages = c('readr', 'dplyr', 'tidyverse', 'plyr', 'poLCA', 'reshape2', 'ggplot2',
              'ggparallel', 'igraph', 'knitr')
 for(p in packages){
@@ -7,18 +8,18 @@ for(p in packages){
   library(p,character.only = T)
 }
 
-
-
+#' 
+## -----------------------------------------------------------------------------------
 data_all <- list.files(path = "data",
                        pattern = "*.csv", full.names = TRUE) %>% 
   lapply(read_csv) %>%                                          
   bind_rows 
 
 data_cleaned <- data_all
-show(data_cleaned)
 
 
-
+#' 
+## -----------------------------------------------------------------------------------
 data_cleaned$school <- revalue(data_cleaned$school, c("GP" = 1))
 data_cleaned$school <- revalue(data_cleaned$school, c("MS" = 2))
 data_cleaned$school <- as.factor(data_cleaned$school)
@@ -105,8 +106,8 @@ data_cleaned$age[data_cleaned$age > 17] <- 2
 data_cleaned$G3[data_cleaned$G3 <= 13] <- 1
 data_cleaned$G3[data_cleaned$G3 > 13] <- 2
 
-
-
+#' 
+## -----------------------------------------------------------------------------------
 GP_Math <- filter(data_cleaned, school == 1 & Subject == "Math")
 GP_Math <- dplyr::select(GP_Math,c(2:3, 11:14, 16:30, 33))
 
@@ -119,168 +120,112 @@ MS_Math <- dplyr::select(MS_Math, c(2:3, 11:14, 16:30, 33))
 MS_Por <- filter(data_cleaned, school == 2 & Subject == "Por")
 MS_Por <- dplyr::select(MS_Por, c(2:3, 11:14, 16:30, 33))
 
-###GP_Math
-
+#' ###GP_Math
+## -----------------------------------------------------------------------------------
 # define function
 f_gpmath <- with(GP_Math,cbind(sex,age,reason,guardian,traveltime,studytime,schoolsup,famsup,paid,activities,nursery,higher,internet,romantic,famrel,freetime,goout,Dalc,Walc,health,absences,G3) ~ 1) #
 
 #------ run a sequence of models with 1-10 classes and print out the model with the lowest BIC
-max_II <- -100000
-min_bic <- 100000
-for(i in 2:10){
-  lc <- poLCA(f_gpmath, GP_Math, nclass=i, maxiter=3000, 
-              tol=1e-5, na.rm=FALSE,  
-              nrep=10, verbose=TRUE, calc.se=TRUE)
-  if(lc$bic < min_bic){
-    min_bic <- lc$bic
-    GP_Math_LCA_best_model<-lc
-  }
-}    	
-GP_Math_LCA_best_model
+   	
+GP_Math_LCA_best_model <- poLCA(f_gpmath, GP_Math, nclass=2, maxiter=3000, 
+                                tol=1e-5, na.rm=FALSE,  
+                                nrep=10, verbose=TRUE, calc.se=TRUE)
 
 # Make a cleaner plot, first easily converting a list to a DF with melt():
 GP_Math_lcModelProbs <- melt(GP_Math_LCA_best_model$probs)
 
-# Replicating the poLCA 3-D plot, without the 3-D:
-zp1 <- ggplot(GP_Math_lcModelProbs,
-              aes(x = L1, y = value, fill = Var2)) +
-  geom_bar(stat = "identity", position = "stack") +
-  facet_wrap(~ Var1)
-print(zp1)
 
 # Suggested alternative, as a possible improvement:
-zp2 <- ggplot(GP_Math_lcModelProbs,
+zp1 <- ggplot(GP_Math_lcModelProbs,
               aes(x = Var1, y = value, fill = Var2)) + 
   geom_bar(stat = "identity", position = "stack") +
   facet_wrap(~ L1) +
   scale_x_discrete("Class", expand = c(0, 0)) +
   scale_y_continuous("Proportion", expand = c(0, 0)) +
   scale_fill_discrete("Factor Level") +
-  theme_bw()
-print(zp2)
+  theme_bw() +
+  ggtitle("Latent Clusters of GP in Math")
+print(zp1)
 
-###GP_Por
-
+#' ###GP_Por
+## -----------------------------------------------------------------------------------
 # define function
 f_gppor <- with(GP_Por,cbind(sex,age,reason,guardian,traveltime,studytime,schoolsup,famsup,paid,activities,nursery,higher,internet,romantic,famrel,freetime,goout,Dalc,Walc,health,absences,G3) ~ 1) #
 
 #------ run a sequence of models with 1-10 classes and print out the model with the lowest BIC
-max_II <- -100000
-min_bic <- 100000
-for(i in 2:10){
-  lc <- poLCA(f_gppor, GP_Por, nclass=i, maxiter=3000, 
-              tol=1e-5, na.rm=FALSE,  
-              nrep=10, verbose=TRUE, calc.se=TRUE)
-  if(lc$bic < min_bic){
-    min_bic <- lc$bic
-    GP_Por_LCA_best_model<-lc
-  }
-}    	
-GP_Por_LCA_best_model
+    	
+GP_Por_LCA_best_model <- poLCA(f_gppor, GP_Por, nclass=2, maxiter=3000, 
+                               tol=1e-5, na.rm=FALSE,  
+                               nrep=10, verbose=TRUE, calc.se=TRUE)
 
-plot(GP_Por_LCA_best_model)
 
 # Make a cleaner plot, first easily converting a list to a DF with melt():
 GP_Por_lcModelProbs <- melt(GP_Por_LCA_best_model$probs)
 
-# Replicating the poLCA 3-D plot, without the 3-D:
-zp3 <- ggplot(GP_Por_lcModelProbs,
-              aes(x = L1, y = value, fill = Var2)) +
-  geom_bar(stat = "identity", position = "stack") +
-  facet_wrap(~ Var1)
-print(zp3)
 
 # Suggested alternative, as a possible improvement:
-zp4 <- ggplot(GP_Por_lcModelProbs,
+zp2 <- ggplot(GP_Por_lcModelProbs,
               aes(x = Var1, y = value, fill = Var2)) + 
   geom_bar(stat = "identity", position = "stack") +
   facet_wrap(~ L1) +
   scale_x_discrete("Class", expand = c(0, 0)) +
   scale_y_continuous("Proportion", expand = c(0, 0)) +
   scale_fill_discrete("Factor Level") +
-  theme_bw()
-print(zp4)
+  theme_bw() +
+  ggtitle("Latent Clusters of GP in Portuguese")
+print(zp2)
 
-###MS_Math
-
+#' ###MS_Math
+## -----------------------------------------------------------------------------------
 # define function
 f_msmath <- with(MS_Math,cbind(sex,age,reason,guardian,traveltime,studytime,schoolsup,famsup,paid,activities,nursery,higher,internet,romantic,famrel,freetime,goout,Dalc,Walc,health,absences,G3) ~ 1) #
 
-#------ run a sequence of models with 1-10 classes and print out the model with the lowest BIC
-max_II <- -100000
-min_bic <- 100000
-for(i in 2:10){
-  lc <- poLCA(f_msmath, MS_Math, nclass=i, maxiter=3000, 
-              tol=1e-5, na.rm=FALSE,  
-              nrep=10, verbose=TRUE, calc.se=TRUE)
-  if(lc$bic < min_bic){
-    min_bic <- lc$bic
-    MS_Math_LCA_best_model<-lc
-  }
-}    	
-MS_Math_LCA_best_model
+    	
+MS_Math_LCA_best_model <- poLCA(f_msmath, MS_Math, nclass=2, maxiter=3000, 
+                                tol=1e-5, na.rm=FALSE,  
+                                nrep=10, verbose=TRUE, calc.se=TRUE)
 
-plot(MS_Math_LCA_best_model)
 
 # Make a cleaner plot, first easily converting a list to a DF with melt():
 MS_Math_lcModelProbs <- melt(MS_Math_LCA_best_model$probs)
 
-# Replicating the poLCA 3-D plot, without the 3-D:
-zp5 <- ggplot(MS_Math_lcModelProbs,
-              aes(x = L1, y = value, fill = Var2)) +
-  geom_bar(stat = "identity", position = "stack") +
-  facet_wrap(~ Var1)
-print(zp5)
 
 # Suggested alternative, as a possible improvement:
-zp6 <- ggplot(MS_Math_lcModelProbs,
+zp3 <- ggplot(MS_Math_lcModelProbs,
               aes(x = Var1, y = value, fill = Var2)) + 
   geom_bar(stat = "identity", position = "stack") +
   facet_wrap(~ L1) +
   scale_x_discrete("Class", expand = c(0, 0)) +
   scale_y_continuous("Proportion", expand = c(0, 0)) +
   scale_fill_discrete("Factor Level") +
-  theme_bw()
-print(zp6)
+  theme_bw() +
+  ggtitle("Latent Clusters of MS in Math")
+print(zp3)
 
-###MS_Por
-
+#' ###MS_Por
+## -----------------------------------------------------------------------------------
 # define function
 f_mspor <- with(MS_Por,cbind(sex,age,reason,guardian,traveltime,studytime,schoolsup,famsup,paid,activities,nursery,higher,internet,romantic,famrel,freetime,goout,Dalc,Walc,health,absences,G3) ~ 1) #
 
-#------ run a sequence of models with 1-10 classes and print out the model with the lowest BIC
-max_II <- -100000
-min_bic <- 100000
-for(i in 2:10){
-  lc <- poLCA(f_mspor, MS_Por, nclass=i, maxiter=3000, 
-              tol=1e-5, na.rm=FALSE,  
-              nrep=10, verbose=TRUE, calc.se=TRUE)
-  if(lc$bic < min_bic){
-    min_bic <- lc$bic
-    MS_Por_LCA_best_model<-lc
-  }
-}    	
-MS_Por_LCA_best_model
+    	
+MS_Por_LCA_best_model <- poLCA(f_mspor, MS_Por, nclass=2, maxiter=3000, 
+                               tol=1e-5, na.rm=FALSE,  
+                               nrep=10, verbose=TRUE, calc.se=TRUE)
 
-plot(MS_Por_LCA_best_model)
 
 # Make a cleaner plot, first easily converting a list to a DF with melt():
 MS_Por_lcModelProbs <- melt(MS_Por_LCA_best_model$probs)
 
-# Replicating the poLCA 3-D plot, without the 3-D:
-zp7 <- ggplot(MS_Por_lcModelProbs,
-              aes(x = L1, y = value, fill = Var2)) +
-  geom_bar(stat = "identity", position = "stack") +
-  facet_wrap(~ Var1)
-print(zp7)
 
 # Suggested alternative, as a possible improvement:
-zp8 <- ggplot(MS_Por_lcModelProbs,
+zp4 <- ggplot(MS_Por_lcModelProbs,
               aes(x = Var1, y = value, fill = Var2)) + 
   geom_bar(stat = "identity", position = "stack") +
   facet_wrap(~ L1) +
   scale_x_discrete("Class", expand = c(0, 0)) +
   scale_y_continuous("Proportion", expand = c(0, 0)) +
   scale_fill_discrete("Factor Level") +
-  theme_bw()
-print(zp8)
+  theme_bw() +
+  ggtitle("Latent Clusters of MS in Portuguese")
+print(zp4)
+ 
