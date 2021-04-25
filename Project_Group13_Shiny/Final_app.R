@@ -760,7 +760,7 @@ ui <- navbarPage("Group 13: The Impact of Lifestyle and Family Background on Gra
                               mainPanel(
                                   plotOutput("barchart")
                               )),
-                     tabPanel("Betweenstats",
+                     tabPanel("Violin chart",
                               sidebarPanel(
                                   selectInput(inputId = "bet_data",
                                               label = "Choose school and subject:",
@@ -799,16 +799,7 @@ ui <- navbarPage("Group 13: The Impact of Lifestyle and Family Background on Gra
                                                   "Weekend Alcohol" = "Walc",
                                                   "Health" = "health"
                                               ),
-                                              selected = "Sex"),
-                                  selectInput(inputId = "betmethod",
-                                              label = "Choose calculation method:",
-                                              choices = c(
-                                                  "parametric" = "p",
-                                                  "nonparametric" = "np",
-                                                  "robust" = "r",
-                                                  "bayes" = "bf"
-                                              ),
-                                              selected = "parametric")
+                                              selected = "Sex")
                                   
                               ),
                               mainPanel(
@@ -845,12 +836,11 @@ ui <- navbarPage("Group 13: The Impact of Lifestyle and Family Background on Gra
                                   h4("Instruction:"),'<br/>',
                                   h4("1. Choose school and subject."),'<br/>',
                                   h4("2. Choose which variable you want to explore its distribution and propotion."),'<br/>',
-                                  h2("3. Betweenstats"),'<br/>',
-                                  h4("A combination of box and violin plots along with jittered data points for between-subjects designs with statistical details included in the plot as a subtitle."),'<br/>',
+                                  h2("3. Violin Chart"),'<br/>',
+                                  h4("A violin plot is a method of plotting numeric data. It is similar to a box plot, with the addition of a rotated kernel density plot on each side."),'<br/>',
                                   h4("Instruction:"),'<br/>',
                                   h4("1. Choose school and subject."),'<br/>',
                                   h4("2. Choose varibales you want to compare under average score."),'<br/>',
-                                  h4("3. Choose calculation method."),'<br/>',
                                   h2("4. Correaltion"),'<br/>',
                                   h4("In statistics, correlation or dependence is any statistical relationship, whether causal or not, between two random variables or bivariate data."),'<br/>',
                                   h4("Instruction:"),'<br/>',
