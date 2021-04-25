@@ -19,7 +19,7 @@ title_textsize: 65px
 author_textsize: 40px
 sectitle_textsize: 50px
 sectitle2_textsize: 40px
-knit: pagedown::chrome_print
+#knit: pagedown::chrome_print
 ---
 
 ```{r setup, include=FALSE}

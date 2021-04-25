@@ -44,14 +44,13 @@ The application will allow users to review three main types of analysis - explor
 
 In designing the individual charts, we first look at the analysis to be performed, then choose the appropriate chart type for visualization. 
 
-In exploratory data analysis, three charts will be utilized. Firstly, for the purpose of reviewing the distribution and proportions of each variable, a bar chart was used where the percentage proportions were included in the charts for clarity in cases where the proportions are similar. Secondly, to compare inputs between each variable against the average grade, the violin chart was used, with an overlay of the box plot. Third, a correlation plot was utilized to show the correlation amongst the variables, including the target variable, average grade. With many variables, an interactive correlation plot will also be available for selection should the user wish to view specific correlation scores. This is because with the many variables in the data set, putting in numbers into each cell might cause the chart to become messy. 
+In exploratory data analysis, three charts will be utilized. Firstly, for the purpose of reviewing the distribution and proportions of each variable, a bar chart was used where the percentage proportions were included in the charts for clarity in cases where the proportions are similar. Secondly, to compare inputs between each variable against the average grade, the violin chart was used, with an overlay of the box plot. Third, a correlation plot was utilized to show the correlation amongst the variables, including the target variable, average grade. With many variables, an interactive correlation plot will also be available for selection should the user wish to view specific correlation scores. This is because with the many variables in the data set, putting in numbers into each cell might cause the chart to become messy. In each of these three charts, the user is able to decide the data set and the variable to be explored.
 
 For the clustering analysis, 
 
-Finally for the predictive model analysis, 
+Finally for the predictive model analysis, the decision tree modeling will be used. Here, three charts will be presented - the decision tree diagram, a bar chart to show the level of importance of the variables, and a confusion matrix. The decision tree will the decision making process based on the inputs of each variable to reach the conclusion of the grades. However, knowing this flow may not be enough. Hence, a bar chart to show the importance of each variable was included, to rank the variables according to the impact it has on a student's grades. Besides this, it is also important to evaluate the performance of the model. Hence, the confusion matrix was included to allow the user to review the accuracy of the prediction of the grades. Here, the user is able to firstly select the data set, the number of bins for the grades, as well as the variables to be studied further. 
 
 The demonstration of using each chart will be discussed further below. 
-
 
 # Data Preparation
 
@@ -103,9 +102,10 @@ Further data cleaning and manipulation was done, such as creating dummy variable
 
 The bar chart and histogram will be used for users to see the distribution of proportions within each variable. This gives a clear breakdown and proportion of the inputs in each variable. Nominal data variables will utilize this bar chart, where the percentage proportion will be indicated so that comparisons can be done not out of estimation, but with clear data. Here, the user is able to firstly select the data set of interest, then the variable to review can be selected next. 
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', fig.align='center', fig.cap='Bar Chart', fig.height=4}
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', fig.cap='Bar Chart', fig.pos = 'h'}
 knitr::include_graphics("barchart.png")
 ```
+
 
 As for the histogram, it will be used for the variables with a larger range. Due to larger range, the user is able to change the number of bins on top of selecting the data set and the variable. The histogram will also be interactive in a way where the user is able to hover the cursor over the data point to see the count.
 
@@ -139,15 +139,26 @@ Below the dendrogram and heatmap, a series of violin charts with boxplots will b
 
 ## Predictive Modeling
 
-For predictive modeling, 
+For predictive modeling, the decision tree method was used. Three charts will be shown here - the decision tree, a bar chart based on the level of importance for each variable selected, and finally a confusion matrix. Here, the user is first able to select the number of bins to be created for the grades obtained by the students. Then, the user can select the variables to be studied further. The decision tree will automatically update and show how each variable represented by the circles and the logic indicated on the lines, and finally the grade bin shown by a box. 
 
-The user is firstly able to select
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', fig.cap='Decision Tree', fig.pos = 'h'}
+knitr::include_graphics("decisiontree1.png")
+```
+
+Below the decision tree is a simple bar chart to show the importance of each of the variables selected, sorted by descending order. Here, the user is able to immediate know which variable impacts grades the most out of the variables selected. 
+
+Finally, a confusion matrix is presented, with the X-axis being the actual grade bins, and the Y-axis being the the predicted grade bin. This chart shows the user how well the model is able to predict the grade bin with the selected variables. 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', fig.cap='Importance Bar Chart and Confusion Matrix', fig.pos = 'h'}
+knitr::include_graphics("decisiontree2.png")
+```
+
 
 # Conclusion and Future Work
 
 Being able to demonstrate the data visualization and implementation of interactivity within the application allows users to further explore data sets in a deeper way. Beyond just knowing what impacts a student's grades, the user is able to explore the demographics of the students as well as to study certain groups of students. 
 
-Although our application was able to pick out some of the more significant variables, the results are not as ideal as we wanted. Hence, further work could be done to firstly implement and compare other methods of analysis and modeling. Secondly, to have a larger data set to obtain more accurate results. 
+Although our application was able to pick out some of the more significant variables, the results are not as ideal as we wanted as the level of accuracy is still not optimal. Hence, further work could be done to firstly implement and compare other methods of analysis and modeling. Secondly, to have a larger data set to obtain more accurate results. 
 
 Implementing another function where users can input their own data sets would be useful, to allow this application to be applicable to any user who has a data set that they would like to explore and perform analysis on. 
 
