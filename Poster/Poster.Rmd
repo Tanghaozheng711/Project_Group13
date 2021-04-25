@@ -77,6 +77,8 @@ knitr::include_graphics("decisiontree2.png")
 
 # Findings
 
+
+
 # Future Work
 
 - Including a function to compare distributions or proportions between variables could be added to further explore the different variables in the data set

@@ -44,9 +44,9 @@ The application will allow users to review three main types of analysis - explor
 
 In designing the individual charts, we first look at the analysis to be performed, then choose the appropriate chart type for visualization. 
 
-In exploratory data analysis, three charts will be utilized. Firstly, for the purpose of reviewing the distribution and proportions of each variable, a bar chart was used where the percentage proportions were included in the charts for clarity in cases where the proportions are similar. Secondly, to compare inputs between each variable against the average grade, the violin chart was used, with an overlay of the box plot. Third, a correlation plot was utilized to show the correlation amongst the variables, including the target variable, average grade. With many variables, an interactive correlation plot will also be available for selection should the user wish to view specific correlation scores. This is because with the many variables in the data set, putting in numbers into each cell might cause the chart to become messy. In each of these three charts, the user is able to decide the data set and the variable to be explored.
+In exploratory data analysis, three charts will be utilized. Firstly, for the purpose of reviewing the distribution and proportions of each variable, a bar chart was used where the percentage proportions were included in the charts for clarity in cases where the proportions are similar. Secondly, to compare inputs between each variable against the average grade, the violin chart was used, with an overlay of the box plot. Third, a correlation plot was utilized to show the correlation amongst the variables, including the target variable, average grade. With many variables, an interactive correlation plot was created to allow the user to view specific correlation scores. This is because with the many variables in the data set, putting in numbers into each cell might cause the chart to become messy. In each of these three charts, the user is able to decide the data set and the variable to be explored.
 
-For the clustering analysis, 
+For the clustering analysis, latent clustering was used. 
 
 Finally for the predictive model analysis, the decision tree modeling will be used. Here, three charts will be presented - the decision tree diagram, a bar chart to show the level of importance of the variables, and a confusion matrix. The decision tree will the decision making process based on the inputs of each variable to reach the conclusion of the grades. However, knowing this flow may not be enough. Hence, a bar chart to show the importance of each variable was included, to rank the variables according to the impact it has on a student's grades. Besides this, it is also important to evaluate the performance of the model. Hence, the confusion matrix was included to allow the user to review the accuracy of the prediction of the grades. Here, the user is able to firstly select the data set, the number of bins for the grades, as well as the variables to be studied further. 
 
@@ -149,10 +149,20 @@ Below the decision tree is a simple bar chart to show the importance of each of 
 
 Finally, a confusion matrix is presented, with the X-axis being the actual grade bins, and the Y-axis being the the predicted grade bin. This chart shows the user how well the model is able to predict the grade bin with the selected variables. 
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', fig.cap='Importance Bar Chart and Confusion Matrix', fig.pos = 'h'}
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', fig.cap='Confusion Matrix', fig.pos = 'h'}
 knitr::include_graphics("decisiontree2.png")
 ```
 
+# Findings
+
+Through various combinations of variable selection, we found that the top 4 variables that are important in predicting a student's grades are number of failures, number of absences, weekend alcohol consumption as well as family relationship.
+
+With number of failures, it will definitely be a good predictor since it will show the competency level of the student in being able to do well. Absences may show the attitude the student has on studying, or if there are legitimate reasons for being absent, missing out on class would have an impact on the student's learning. 
+
+For alcohol consumption and family relationship, studies have been done to show how these factors do affect one's academic performance to a certain extent. For example, in papers by Mills et al. (2013) and Shahrier et al. (2015) showing the impact that alcohol consumption and family relationships have on academic performance respectively. 
+
+However, based on the results from the confusion matrix, the accuracy of prediction was not ideal. While the algorithm was able to pick up students who would score better, the model was not able to accuracy pick out students who fared badly.  
 
 # Conclusion and Future Work
 
@@ -162,7 +172,7 @@ Although our application was able to pick out some of the more significant varia
 
 Implementing another function where users can input their own data sets would be useful, to allow this application to be applicable to any user who has a data set that they would like to explore and perform analysis on. 
 
-**Acknowledgements**
+**Acknowledgements:**
 
 The authors would like to thank Prof. Kam Tin Seong for his guidance and support in the completion of this project. 
 
@@ -170,7 +180,7 @@ The authors would like to thank Prof. Kam Tin Seong for his guidance and support
 
 ---
 references:
-- id: fenner2012a
+- id: Li1
   title: How does family background affect children’s educational achievement? Evidence from Contemporary China
   author:
   - family: Li
@@ -184,6 +194,41 @@ references:
   issued:
     year: 2018
     month: 10
+    
+- id: Ansari1
+  title: Is alcohol consumption associated with poor academic achievement in university students?
+  author:
+  - family: Mills
+    given: Claire
+  - family: Qiu
+    given: Zeqi
+  - family: Stock
+    given: Christiane
+  - family: Ansari
+    given: Walid El
+  container-title: Int. J. Prev. Med
+  URL: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3843305/'
+  type: article-journal
+  issued:
+    year: 2013
+    month: 10
+    
+- id: Shahrier1
+  title: The relationship between academic performance and family relation of secondary school students
+  author:
+  - family: Shahrier
+    given: M A
+  - family: Islam
+    given: Md Nurul
+  - family: Kayesh
+    given: Kazi
+  - family: Khatun
+    given: Mahbuba
+  URL: 'https://www.researchgate.net/publication/327679318_The_relationship_between_academic_performance_and_family_relation_of_secondary_school_students'
+  type: article-journal
+  issued:
+    year: 2015
+    month: 01
 ...
 
 
