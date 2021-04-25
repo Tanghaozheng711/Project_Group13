@@ -34,7 +34,7 @@ padding: 0;
 }
 body {
 margin: 0;
-font-size: 35px;
+font-size: 30px;
 width: 23.39in;
 height: 33.11in;
 padding: 0;
@@ -311,23 +311,23 @@ font-size: 20pt;
 <h1>Exploratory Data Analysis</h1>
 <strong>Bar Chart/Histogram:</strong> The bar chart and histogram chart is used to visualize the distribution and proportions of each variable in the data set, where the user is able to select the data set as well as the variable to explore.
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
-<img src="barchart.png" alt="Great figure!" width="80%" />
+<img src="barchart.png" alt="Bar chart" width="80%" />
 <p class="caption">
-Figure 1: Great figure!
+Figure 1: Bar chart
 </p>
 </div>
 <strong>Violin Chart:</strong> The violin chart overlayed with a boxplot provides the user with the distribution and the mean grades for each of the inputs in each variable selected. The chart also provides comparisons between the inputs, where if there is a significant difference in grades, the p-value will be shown.
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
-<img src="barchart.png" alt="Great figure!" width="80%" />
+<img src="barchart.png" alt="Violin chart" width="80%" />
 <p class="caption">
-Figure 2: Great figure!
+Figure 2: Violin chart
 </p>
 </div>
 <strong>Correlation Chart:</strong> The correlation plot gives the user an overview of the correlations between each variable, including the average grade where positive and negative correlation are indicated by blue and red respectively. Here, the user can select a static plot or an interactive plot, where the user is able view the correlation value by hovering the cursor over the specific cell.
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
-<img src="barchart.png" alt="Great figure!" width="80%" />
+<img src="barchart.png" alt="Correlation Chart" width="80%" />
 <p class="caption">
-Figure 3: Great figure!
+Figure 3: Correlation Chart
 </p>
 </div>
 </div>
@@ -337,6 +337,21 @@ Figure 3: Great figure!
 </div>
 <div id="predictive-modeling" class="section level1">
 <h1>Predictive Modeling</h1>
+<strong>Decision Tree:</strong> The decision tree shows how the algorithm predicts the grades based on decisions made through inputs of the selected variables. In the chart, the squares represent the predicted grade bin, while the circles represent the variables used in the decision making process. Here, the user is able to select the number of bins for grades and the variables for analysis.
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
+<img src="decisiontree1.png" alt="Decision Tree" width="90%" />
+<p class="caption">
+Figure 4: Decision Tree
+</p>
+</div>
+<p><strong>Bar Chart:</strong> The bar chart here ranks the selected variables according to the importance, or the significance it has on the student’s grades.</p>
+<strong>Confusion Matrix:</strong> The confusion matrix is vital in allowing the user to see the performance of the prediction. With this, the user is able to compare the accuracy of the prediction with different combinations of variables selected.
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
+<img src="decisiontree2.png" alt="Bar chart and confusion matrix" width="80%" />
+<p class="caption">
+Figure 5: Bar chart and confusion matrix
+</p>
+</div>
 </div>
 <div id="findings" class="section level1">
 <h1>Findings</h1>
