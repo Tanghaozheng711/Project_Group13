@@ -753,8 +753,6 @@ ui <- navbarPage("Group 13: The Impact of Lifestyle and Family Background on Gra
                                                   "Father Job" = "Fjob",
                                                   "Reason" = "reason",
                                                   "Guardian" = "guardian",
-                                                  "Travel Time" = "traveltime",
-                                                  "Study Time" = "studytime",
                                                   "Failures" = "failures",
                                                   "School Support" = "schoolsup",
                                                   "Family Support" = "famsup",
@@ -955,21 +953,10 @@ server <- function(input, output) {
             if(input$bet_data == "MS & Math"){data_bet<-data_MS_math}
             if(input$bet_data == "MS & Portuguese"){data_bet<-data_MS_por}
             if(input$bet_data == "All"){data_bet<-data_cleaned}
-            ggbetweenstats( 
-                
-                data = data_bet, 
-                
-                x = sex, 
-                
-                y = avgscore, 
-                
-                results.subtitle = TRUE, 
-                
-                bf.message = FALSE, 
-                
-                type = input$betmethod, 
-                
-                title = "Comparison of Variables Against Average Score")  
+            x <- unlist(data_bet[,input$betvariable])
+            ggplot(data_bet, aes(x = x, y = avgscore, color = x)) +
+                geom_violin(position = position_dodge(1)) +
+                geom_boxplot(color = "black", alpha = 0.5)
         })
         
         output$corplot <- renderPlotly({
