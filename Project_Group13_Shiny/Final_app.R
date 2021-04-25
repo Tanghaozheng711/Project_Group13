@@ -5,7 +5,7 @@ library(shinydashboard)
 ### -----------------------------------------------------------------------------------
 
 packages = c("readr", "dplyr", "tidyverse", "plyr", "poLCA", "reshape2", "ggplot2",
-             "ggparallel", "igraph", "knitr")
+             "ggparallel", "igraph", "knitr","rpart","visNetwork","ggpol","sparkline","stats")
 for(p in packages){
     if(!require(p,character.only = T)){
         install.packages(p)
@@ -587,23 +587,71 @@ data_cor_MS_por = subset(data_cor_MS_por, select = -c(SubjectPor, schoolGP, scho
 #"  
 #" 
 ## -----------------------------------------------------------------------------------
+#Decision tree
+
+df  <- list.files(path = "data", 
+                 
+                 pattern = "*.csv", full.names = TRUE) %>%  
+    
+    lapply(read_csv) %>%                                           
+    
+    bind_rows
+
+data = df
+
+data$Grade <- NA
+data$Schoolsup <- NA
+data$Famsup <- NA
+data$Paid <- NA
+data$Activities <- NA
+data$Nursery <- NA
+data$Higher <- NA
+data$Internet <- NA
+data$Romantic <- NA
+data$Gender <- NA
+data$Grade <- ifelse(data$G3>15,4,ifelse(data$G3>10,3,ifelse(data$G3>5,2,1)))
+data$Grade <- factor(data$Grade)
+data$Schoolsup <- ifelse(data$schoolsup == 'yes', 1, 0)
+data$Schoolsup <- factor(data$Schoolsup)
+data$Famsup <- ifelse(data$famsup == 'yes', 1 , 0)
+data$Famsup <- factor(data$Famsup)
+data$Paid <- ifelse(data$paid == 'yes',1,0)
+data$Paid <- factor(data$Paid)
+data$Activities <- ifelse(data$activities =='yes',1,0)
+data$Activities <- factor(data$Activities)
+data$Nursery <- ifelse(data$nursery =='yes',1,0)
+data$Nursery <- factor(data$Nursery)
+data$Higher <- ifelse(data$higher == 'yes',1,0)
+data$Higher <- factor(data$Higher)
+data$Internet <- ifelse(data$internet =='yes',1,0)
+data$Internet <- factor(data$Internet)
+data$Romantic <- ifelse(data$romantic == 'yes',1,0)
+data$Romantic <- factor(data$Romantic)
+data$Gender <- ifelse(data$sex == 'F',1,0)
+data$Gender <- factor(data$Gender)
+data = data[,-c(1:12)]
+data = data[,-c(4:11)]
+data = data[,-c(11:13)]
+
+(var_list = sort(colnames(dplyr::select(data, -c("Grade")))))
+
 
 
 ### -----------------------------------------------------------------------------------
-# Define UI for application that draws a histogram
+
 ui <- navbarPage("Group 13: The Impact of Lifestyle and Family Background on Grades of High School Students",
-        theme = shinytheme("superhero"),
+        theme = shinytheme("flatly"),
         tabPanel("Introduction",
                      mainPanel(
                          HTML(
                              paste(
                          h2("Introduction"),
                          '<br/>',
-                         h3("In the past many years, there has been an emphasis on education around the world because of the impact it a person, be it in terms of employment opportunities and quality of life. It is hence important to know what are factors that affect one’s academic performance. While there are many factors that can impact a person’s academic performance, family background and one’s lifestyle are two of the larger factors."),
+                         h4("In the past many years, there has been an emphasis on education around the world because of the impact it a person, be it in terms of employment opportunities and quality of life. It is hence important to know what are factors that affect one’s academic performance. While there are many factors that can impact a person’s academic performance, family background and one’s lifestyle are two of the larger factors."),
                          '<br/>',
-                         h3("Since there are many sub-factors in family background and lifestyle choices, the motivation of this study is to look deeper at these sub-factors to see which are the factors that have a greater correlation in the impact on a student’s grades. More specifically, this study aims to study the correlation between each factor and a student’s grades, as well as aiming to build a model that can accurately determine the academic performance of a student."),
+                         h4("Since there are many sub-factors in family background and lifestyle choices, the motivation of this study is to look deeper at these sub-factors to see which are the factors that have a greater correlation in the impact on a student’s grades. More specifically, this study aims to study the correlation between each factor and a student’s grades, as well as aiming to build a model that can accurately determine the academic performance of a student."),
                          '<br/>',
-                         h3("From the findings, targeted help may be administered to students in these specific areas attributing to poor grades in school, therein helping them have a higher chance of a better future.")
+                         h4("From the findings, targeted help may be administered to students in these specific areas attributing to poor grades in school, therein helping them have a higher chance of a better future.")
                      )))
                  ),
         tabPanel("EDA",
@@ -680,7 +728,7 @@ ui <- navbarPage("Group 13: The Impact of Lifestyle and Family Background on Gra
                                   
                               ),
                               mainPanel(
-                                  plotlyOutput("barchart")
+                                  plotOutput("barchart")
                               )),
                      tabPanel("Betweenstats",
                               sidebarPanel(
@@ -736,16 +784,18 @@ ui <- navbarPage("Group 13: The Impact of Lifestyle and Family Background on Gra
                                   
                               ),
                               mainPanel(
-                                  plotlyOutput("betchart")
+                                  plotOutput("betchart")
                               )
                               ),
                      tabPanel("Correlation",
                               sidebarPanel(
-                                  selectInput(inputId = "selectedcorplot",
-                                              label = "Choose correlation plot:",
-                                              choices = c("Static Plot",
-                                                          "Interactive Plot"),
-                                              selected = "Interactive Plot")
+                                  selectInput(inputId = "cordata",
+                                              label = "Choose school and subject:",
+                                              choices = c("GP & Math",
+                                                          "GP & Portuguese",
+                                                          "MS & Math",
+                                                          "MS & Portuguese"),
+                                              selected = "GP & Math")
                               ),
                               mainPanel(
                                   plotlyOutput("corplot")
@@ -819,19 +869,55 @@ ui <- navbarPage("Group 13: The Impact of Lifestyle and Family Background on Gra
                 )
             )
         ),
-        tabPanel("Regression and Decision Tree",
+        tabPanel("Decision Tree",
                  sidebarLayout(
                      sidebarPanel(
-                         h3("This tab has a sidebar")
+                         numericInput("GradeLevel",
+                                      "Number of Grades:",
+                                      value = 4,
+                                      min = 2,
+                                      max = 6,
+                                      step = 1),
+                         selectInput("Variables",
+                                     "Variables Selected:", 
+                                     choices = var_list,
+                                     selected = var_list,
+                                     selectize = FALSE,
+                                     multiple = TRUE,
+                                     size = length(var_list))
                      ),
                      mainPanel(
-                         h2("regression and decision tree")
+                         tabsetPanel(
+                             tabPanel(
+                                 title = "Decision Tree", 
+                                    verticalLayout(
+                                visNetworkOutput("treeVis"),
+                                plotOutput("importance"),
+                                plotOutput("matrix")
+                             )
+                             ),
+                             tabPanel(
+                                 title = "Usage",
+                                 mainPanel(
+                                     HTML(
+                                         paste(
+                                             h4("A decision tree is a decision support tool that uses a tree-like model of decisions and their possible consequences, including chance event outcomes, resource costs, and utility. It is one way to display an algorithm that only contains conditional control statements."),
+                                             '<br/>',
+                                             h4("Note:"),
+                                             '<br/>',
+                                             h4("Some combination of variables may result in error: 'unique() applies only to vectors.' And this is due to the data structure and algorithm of decision tree. ")
+                                         )
+                                     )
+                                 )
+                             )
+                         )
+                        
                      )
                  )
         )
 )
 
-# Define server logic required to draw a histogram
+
 server <- function(input, output) {
         output$histogram <- renderPlotly({
             if(input$histo_data == "GP & Math"){data_histogram<-data_GP_math}
@@ -848,7 +934,7 @@ server <- function(input, output) {
             ggplotly(histo)
         })
         
-        output$barchart <- renderPlotly({
+        output$barchart <- renderPlot({
             if(input$bar_data == "GP & Math"){data_bar<-data_GP_math}
             if(input$bar_data == "GP & Portuguese"){data_bar<-data_GP_por}
             if(input$bar_data == "MS & Math"){data_bar<-data_MS_math}
@@ -863,50 +949,36 @@ server <- function(input, output) {
                 theme(axis.title.x = element_blank()) 
         })
         
-        output$betchart <- renderPlotly({
+        output$betchart <- renderPlot({
             if(input$bet_data == "GP & Math"){data_bet<-data_GP_math}
             if(input$bet_data == "GP & Portuguese"){data_bet<-data_GP_por}
             if(input$bet_data == "MS & Math"){data_bet<-data_MS_math}
             if(input$bet_data == "MS & Portuguese"){data_bet<-data_MS_por}
             if(input$bet_data == "All"){data_bet<-data_cleaned}
-                ggbetweenstats( 
-                    
-                    data = data_bet, 
-                    
-                    x = sex, 
-                    
-                    y = avgscore, 
-                    
-                    results.subtitle = TRUE, 
-                    
-                    bf.message = FALSE, 
-                    
-                    type = "p", 
-                    
-                    title = "Comparison of Variables Against Average Score") 
+            ggbetweenstats( 
+                
+                data = data_bet, 
+                
+                x = sex, 
+                
+                y = avgscore, 
+                
+                results.subtitle = TRUE, 
+                
+                bf.message = FALSE, 
+                
+                type = input$betmethod, 
+                
+                title = "Comparison of Variables Against Average Score")  
         })
         
         output$corplot <- renderPlotly({
-            if (input$selectedcorplot == "Static Plot"){
-                data.cor = cor(data_cor_GP_math) 
-                
-                static_corr <- corrplot(data.cor, 
-                                        
-                                        method = "ellipse",  
-                                        
-                                        type="lower", 
-                                        
-                                        diag = FALSE, 
-                                        
-                                        tl.col = "black", 
-                                        
-                                        tl.cex=0.7) 
-            }
-            if (input$selectedcorplot == "Interactive Plot"){
-                p.mat <- cor_pmat(data_cor_GP_por) 
-                
-                
-                
+            if(input$cordata == "GP & Math"){data_cor<-data_cor_GP_math}
+            if(input$cordata == "GP & Portuguese"){data_cor<-data_cor_GP_por}
+            if(input$cordata == "MS & Math"){data_cor<-data_cor_MS_math}
+            if(input$cordata == "MS & Portuguese"){data_cor<-data_cor_MS_por}
+            
+                data.cor <- cor(data_cor) 
                 corr.plot <- ggcorrplot( 
                     
                     data.cor,  
@@ -922,7 +994,7 @@ server <- function(input, output) {
                 interactive_cor <- ggplotly(corr.plot) 
                 
                 interactive_cor
-            }
+            
         })
         
         output$clusterplot <- renderPlotly({
@@ -931,6 +1003,66 @@ server <- function(input, output) {
             if (input$data_source == "MS & Math") return(zp6) 
             if (input$data_source == "MS & Portuguese") return(zp8)
         })
+        
+        
+        mydata <- reactive({
+            
+            breaks <- floor(seq(min(df$G3), max(df$G3), length.out = input$GradeLevel + 1))
+            
+            data$Grade <- cut(df$G3, breaks = breaks, include.lowest = TRUE)
+            
+            cbind(Grade = data$Grade, dplyr::select(data, input$Variables))
+        })
+        
+        
+        mytree <- reactive({
+            
+            model2 <- rpart(Grade~., data = mydata())
+            Tree <- prune(model2, cp= model2$cptable[which.min(model2$cptable[,"xerror"]),"CP"])
+            
+            Tree
+            
+        })
+        
+        
+        output$treeVis <- renderVisNetwork({
+            visTree(mytree(), main = 'Decision Tree', height = '400px', colorY = c('red','blue','green','black'))
+            
+        })
+        
+        
+        output$importance <- renderPlot({
+            
+            Tree <- mytree()
+            
+            varimp <- Tree$variable.importance
+            varimpdf <- data.frame(var = names(varimp),
+                                   impor = varimp)
+            g <- ggplot(varimpdf,aes(x = reorder(var,impor), y = impor))+
+                geom_col(colour = "lightblue",fill = "lightblue")+
+                labs(x = "Variable", y = 'Importance') + 
+                coord_flip()
+            
+            g
+            
+        })
+        
+        
+        output$matrix <- renderPlot({
+            data = mydata()
+            Tree = mytree()
+            
+            pre <- predict(Tree,data,type = "class")
+            
+            ggplot() + geom_confmat(aes(x = data$Grade, y = pre),
+                                    normalize = TRUE, text.perc = TRUE)+
+                labs(x = "Reference",y = "Prediction")+
+                scale_fill_gradient2(low="darkblue", high="lightgreen")
+            
+        })
+        
+        
+        
 }
 
 # Run the application 
