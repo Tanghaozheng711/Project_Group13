@@ -839,13 +839,17 @@ ui <- navbarPage("Group 13: The Impact of Lifestyle and Family Background on Gra
                                         "GP & Portuguese",
                                         "MS & Math",
                                         "MS & Portuguese"),
-                            selected = "GP & Math")
+                            selected = "GP & Math"),
+                    checkboxInput(inputId = "show_result",
+                                  label = "Show cluster result",
+                                  value = F)
             ),
                 mainPanel(
                     tabsetPanel(
                     tabPanel(
                         title = "Plot",
-                        plotlyOutput("clusterplot")
+                        plotlyOutput("clusterplot"),
+                        verbatimTextOutput("clusterresult")
                     ),
                     tabPanel(
                         title = "Usage",
@@ -857,7 +861,9 @@ ui <- navbarPage("Group 13: The Impact of Lifestyle and Family Background on Gra
                                     '<br/>',
                                     h4("In our project, LCM visualization reveals the shared pattern of lifestyle choices and family background of students that belong to the same cluster."),
                                     '<br/>',
-                                    h4("Through this viewers are able to fetch the information about how these two major factors impact on students grade.")
+                                    h4("Through this viewers are able to fetch the information about how these two major factors impact on students grade."),
+                                    '<br/>',
+                                    h4("Hint: By checking the 'Show cluster result', viewers are able to have a more specific information on cluster component proportion.")
                                 )
                             )
                         )
@@ -991,6 +997,16 @@ server <- function(input, output) {
             if (input$data_source == "MS & Portuguese") return(zp8)
         })
         
+        output$clusterresult <-renderPrint({
+            if(input$show_result){
+            
+            if (input$data_source == "GP & Math") return(GP_Math_LCA_best_model)
+            if (input$data_source == "GP & Portuguese") return(GP_Por_LCA_best_model)
+            if (input$data_source == "MS & Math") return(MS_Math_LCA_best_model) 
+            if (input$data_source == "MS & Portuguese") return(MS_Por_LCA_best_model)
+                
+            }
+        })
         
         mydata <- reactive({
             
