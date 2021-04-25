@@ -40,13 +40,13 @@ However, from these papers went through, it was observed that these either only 
 
 # Design Framework
 
-The application will allow users to review three main types of analysis - exploratory and confirmatory data analysis, clustering analysis and predictive modeling. These being the main analysis types will be split by a separate tab in the application. Within each of these analysis types will involve different charts, which will include some functions of interactivity to allow the user to explore the data further. 
+The application will allow users to review three main types of analysis - exploratory and confirmatory data analysis, clustering analysis and predictive modeling. These being the main analysis types will be split by a separate tab in the application. Within each of these analysis types will involve different charts, which will include some functions of interactivity to allow the user to explore the data further. Within each tab, a tab "Usage" will be present to guide users on how to navigate around the selections. 
 
 In designing the individual charts, we first look at the analysis to be performed, then choose the appropriate chart type for visualization. 
 
 In exploratory data analysis, three charts will be utilized. Firstly, for the purpose of reviewing the distribution and proportions of each variable, a bar chart was used where the percentage proportions were included in the charts for clarity in cases where the proportions are similar. Secondly, to compare inputs between each variable against the average grade, the violin chart was used, with an overlay of the box plot. Third, a correlation plot was utilized to show the correlation amongst the variables, including the target variable, average grade. With many variables, an interactive correlation plot was created to allow the user to view specific correlation scores. This is because with the many variables in the data set, putting in numbers into each cell might cause the chart to become messy. In each of these three charts, the user is able to decide the data set and the variable to be explored.
 
-For the clustering analysis, latent clustering was used. 
+For the clustering analysis, latent class clustering was used and presented through a series of stacked bar charts. Each variable will present a bar chart for each cluster, stacked by the factor levels for each of the variables. From here, the user is able to quickly compare the bar charts for each variable, and for variables that have very differing stacked bar charts between the clusters, it means the variable is a significant differing variable between the clusters. 
 
 Finally for the predictive model analysis, the decision tree modeling will be used. Here, three charts will be presented - the decision tree diagram, a bar chart to show the level of importance of the variables, and a confusion matrix. The decision tree will the decision making process based on the inputs of each variable to reach the conclusion of the grades. However, knowing this flow may not be enough. Hence, a bar chart to show the importance of each variable was included, to rank the variables according to the impact it has on a student's grades. Besides this, it is also important to evaluate the performance of the model. Hence, the confusion matrix was included to allow the user to review the accuracy of the prediction of the grades. Here, the user is able to firstly select the data set, the number of bins for the grades, as well as the variables to be studied further. 
 
@@ -102,65 +102,89 @@ Further data cleaning and manipulation was done, such as creating dummy variable
 
 The bar chart and histogram will be used for users to see the distribution of proportions within each variable. This gives a clear breakdown and proportion of the inputs in each variable. Nominal data variables will utilize this bar chart, where the percentage proportion will be indicated so that comparisons can be done not out of estimation, but with clear data. Here, the user is able to firstly select the data set of interest, then the variable to review can be selected next. 
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', fig.cap='Bar Chart', fig.pos = 'h'}
-knitr::include_graphics("barchart.png")
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='90%', fig.align='center', fig.cap='Bar Chart', fig.pos = 'h'}
+knitr::include_graphics("newbarchart.png")
 ```
-
 
 As for the histogram, it will be used for the variables with a larger range. Due to larger range, the user is able to change the number of bins on top of selecting the data set and the variable. The histogram will also be interactive in a way where the user is able to hover the cursor over the data point to see the count.
 
-INSERT PICTURE
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='90%', fig.align='center', fig.cap='Histogram', fig.pos = 'h'}
+knitr::include_graphics("histo.png")
+```
 
 ### Comparison of Results
 
-The violin graph is the chart the user is able to use for comparing the difference between each variable with respect to the average grade. From the chart, besides having the boxplot where the user is able to see the upper quartiles, lower quartiles and mean, the user is able to see the distribution of grades through the width of the violin graph. The chart also provides statistical indications, where if any two inputs are significantly different in the results, the p-value will be shown. The user is able to select the data set to review as well as the specific variable to study compare. 
+The violin chart is the chart the user is able to use for comparing the difference between each variable with respect to the average grade. From the chart, besides having the boxplot where the user is able to see the indication of upper quartiles, lower quartiles and mean, the user is able to see the distribution of grades through the width of the violin graph. 
 
-INSERT PICTURE
+The user is able to select the data set to review as well as the specific variable to compare the distribution of grades across the inputs in each variable. 
+ 
+\
+\
+\
+\
+\
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='90%', fig.align='center', fig.cap='Violin chart', fig.pos = 'h'}
+knitr::include_graphics("violin.png")
+```
 
 ### Correlation
 
-For reviewing the correlation, the user is able to select one of two charts. The first chart is static where no interactivity is implemented. This chart is to give the user a broad overview of the correlations between each variable, with average score being at the bottom left. The correlations are presented through coloured ellipses, where red indicates a negative correlation while blue indicates a positive correlation, with the degree of correlation indicated by the gradient of colour. 
+For reviewing the correlation, the user is able to see a chart with interactivity functions. By itself, the user can see the correlation between each variable, as well as each variable with the average score, which is found on the top of the Y axis. Here, the correlation is indicated by colour, with blue representing a positive correlation and red indicating negative correlation. The intensity of the colour shows the degree of correlation. 
 
-The other plot that the user can look at is one with interactivity. This allows the user to hover the cursor over each box, where a tool tip will appear, indicating the two participating variables as well as the correlation value. This allows the user to see specific correlation values between variables. Similar to the static correlation chart, the correlation value is indicated by the colour and gradient. 
+The user can hover the cursor over each box, where a tool tip will appear, indicating the two participating variables as well as the correlation value. This allows the user to see specific correlation values between variables. Similar to the static correlation chart, the correlation value is indicated by the colour and gradient. To have a closer look, the user is also able to drag a rectangle in the area of interest. 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='90%', fig.align='center', fig.cap='Correlation chart', fig.pos = 'h'}
+knitr::include_graphics("correlation.png")
+```
 
 ## Cluster Analysis
 
-### Dendrogram and Heatmap
+### Latent Class Cluster Analysis
 
-In cluster analysis, the aim is to group all the data points into smaller groups based on their traits, which are given by the individual inputs for each variable. From here, the user is able to explore and see which students are similar in terms of their demographics. In this section, a dendrogram along with a heatmap can be studied. Each row in the heatmap represents one data point, or in this case one student, and they are arranged based on the inputs of each variables by clustering them together. The clusters created can be observed from the right of the chart, indicated by the different colours. 
+In cluster analysis, the aim is to group all the data points into smaller groups based on their traits, which are given by the individual inputs for each variable. From here, the user is able to explore and see which students are similar in terms of their demographics. In this section, latent class clustering was implemented with two clusters generated. In this chart, for each variable, there are two stacked bar charts, one for each cluster or group. 
 
-In terms of interactivity, the user is able to select the data set for reviewing, then from the heatmap and dendrogram generated, hovering the cursor over each cell will show the details of each cell, and zooming in can be done by dragging out a rectangle. 
+By comparing the two bar charts across the variables, the user is able to pick out the variables were the stacked bar charts are different in terms of the factor levels. These will be the distinct traits for each of the clusters. 
 
-INSERT TWO PICTURES
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='90%', fig.align='center', fig.cap='Latent Class Clustering', fig.pos = 'h'}
+knitr::include_graphics("latentclass.png")
+```
 
-### Comparison of Clusters
-
-Below the dendrogram and heatmap, a series of violin charts with boxplots will be presented. This chart allows the user to see the distribution of grade scores for each variable, sorted by the inputs from each cluster formed previously. From the chart, the user will be able to compare the grades obtained by students based on which cluster they are in for each input. The user will be able to select the data set to be studied as well as the variable to explore. 
+\
 
 ## Predictive Modeling
 
 For predictive modeling, the decision tree method was used. Three charts will be shown here - the decision tree, a bar chart based on the level of importance for each variable selected, and finally a confusion matrix. Here, the user is first able to select the number of bins to be created for the grades obtained by the students. Then, the user can select the variables to be studied further. The decision tree will automatically update and show how each variable represented by the circles and the logic indicated on the lines, and finally the grade bin shown by a box. 
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', fig.cap='Decision Tree', fig.pos = 'h'}
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='90%', fig.align='center', fig.cap='Decision Tree', fig.pos = 'h'}
 knitr::include_graphics("decisiontree1.png")
 ```
 
 Below the decision tree is a simple bar chart to show the importance of each of the variables selected, sorted by descending order. Here, the user is able to immediate know which variable impacts grades the most out of the variables selected. 
 
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='90%', fig.align='center', fig.cap='Importance Bar Chart', fig.pos = 'h'}
+knitr::include_graphics("importancechart.png")
+```
+
 Finally, a confusion matrix is presented, with the X-axis being the actual grade bins, and the Y-axis being the the predicted grade bin. This chart shows the user how well the model is able to predict the grade bin with the selected variables. 
 
-
-```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', fig.cap='Confusion Matrix', fig.pos = 'h'}
-knitr::include_graphics("decisiontree2.png")
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='90%', fig.align='center', fig.cap='Confusion Matrix', fig.pos = 'h'}
+knitr::include_graphics("confusion.png")
 ```
+
 
 # Findings
 
-Through various combinations of variable selection, we found that the top 4 variables that are important in predicting a student's grades are number of failures, number of absences, weekend alcohol consumption as well as family relationship.
+Through various combinations of variable selection, we found that the top 5 variables that are important in predicting a student's grades are number of failures, number of absences, extra education support, weekend alcohol consumption as well as the desire for higher education.
 
-With number of failures, it will definitely be a good predictor since it will show the competency level of the student in being able to do well. Absences may show the attitude the student has on studying, or if there are legitimate reasons for being absent, missing out on class would have an impact on the student's learning. 
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='90%', fig.align='center', fig.cap='Findings', fig.pos = 'h'}
+knitr::include_graphics("findings.png")
+```
 
-For alcohol consumption and family relationship, studies have been done to show how these factors do affect one's academic performance to a certain extent. For example, in papers by Mills et al. (2013) and Shahrier et al. (2015) showing the impact that alcohol consumption and family relationships have on academic performance respectively. 
+With number of failures, it will definitely be a good predictor since it will show the competency level of the student in being able to do well. Absences may show the attitude the student has on studying, or if there are legitimate reasons for being absent, missing out on class would have an impact on the student's learning. Extra education support would make sense to be a significant variable since additional help would give these student an edge over the rest. With the desire for taking higher education comes a greater motivation to study and do well so that they are able to take on the next level of education. 
+
+For alcohol consumption, studies have been done to show how these factors do affect one's academic performance to a certain extent. For example, in a paper by Mills et al. (2013) showing the impact of alcohol consumption on academic performance respectively. 
 
 However, based on the results from the confusion matrix, the accuracy of prediction was not ideal. While the algorithm was able to pick up students who would score better, the model was not able to accuracy pick out students who fared badly.  
 
@@ -168,7 +192,7 @@ However, based on the results from the confusion matrix, the accuracy of predict
 
 Being able to demonstrate the data visualization and implementation of interactivity within the application allows users to further explore data sets in a deeper way. Beyond just knowing what impacts a student's grades, the user is able to explore the demographics of the students as well as to study certain groups of students. 
 
-Although our application was able to pick out some of the more significant variables, the results are not as ideal as we wanted as the level of accuracy is still not optimal. Hence, further work could be done to firstly implement and compare other methods of analysis and modeling. Secondly, to have a larger data set to obtain more accurate results. 
+Although our application was able to pick out some of the more significant variables, the results are not as ideal as we wanted as the level of accuracy is still not optimal. Hence, further work could be done to firstly implement and compare other methods of analysis and modeling. Secondly, to have a larger data set to obtain more accurate results as the results could be due to a small number of students who fared very well or very badly. 
 
 Implementing another function where users can input their own data sets would be useful, to allow this application to be applicable to any user who has a data set that they would like to explore and perform analysis on. 
 
@@ -212,23 +236,6 @@ references:
   issued:
     year: 2013
     month: 10
-    
-- id: Shahrier1
-  title: The relationship between academic performance and family relation of secondary school students
-  author:
-  - family: Shahrier
-    given: M A
-  - family: Islam
-    given: Md Nurul
-  - family: Kayesh
-    given: Kazi
-  - family: Khatun
-    given: Mahbuba
-  URL: 'https://www.researchgate.net/publication/327679318_The_relationship_between_academic_performance_and_family_relation_of_secondary_school_students'
-  type: article-journal
-  issued:
-    year: 2015
-    month: 01
 ...
 
 

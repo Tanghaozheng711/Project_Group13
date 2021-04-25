@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.4.20)  25 APR 2021 18:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.4.20)  25 APR 2021 21:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -447,59 +447,127 @@ dftex.map}
 
 
 ]
-<barchart.png, id=90, 701.62125pt x 399.74344pt>
-File: barchart.png Graphic file (type png)
-<use barchart.png>
-Package pdftex.def Info: barchart.png  used on input line 313.
-(pdftex.def)             Requested size: 192.00073pt x 109.38997pt.
+Underfull \vbox (badness 2698) has occurred while \output is active []
+
+pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
+een already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.319 
+       [2]
+<newbarchart.png, id=96, 570.63188pt x 275.52937pt>
+File: newbarchart.png Graphic file (type png)
+<use newbarchart.png>
+Package pdftex.def Info: newbarchart.png  used on input line 322.
+(pdftex.def)             Requested size: 215.99854pt x 104.29443pt.
 
 LaTeX Font Warning: Font shape `T1/aer/b/n' undefined
-(Font)              using `T1/aer/m/n' instead on input line 313.
+(Font)              using `T1/aer/m/n' instead on input line 326.
 
+<histo.png, id=98, 569.12625pt x 260.47313pt>
+File: histo.png Graphic file (type png)
+<use histo.png>
+Package pdftex.def Info: histo.png  used on input line 337.
+(pdftex.def)             Requested size: 215.99854pt x 98.8576pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 358--363
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 358--363
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 358--363
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 358--363
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 358--363
+
+ []
+
+<violin.png, id=99, 556.0775pt x 273.02pt>
+File: violin.png Graphic file (type png)
+<use violin.png>
+Package pdftex.def Info: violin.png  used on input line 366.
+(pdftex.def)             Requested size: 215.99854pt x 106.04828pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
+
+<correlation.png, id=100, 552.56438pt x 260.47313pt>
+File: correlation.png Graphic file (type png)
+<use correlation.png>
+Package pdftex.def Info: correlation.png  used on input line 394.
+(pdftex.def)             Requested size: 215.99854pt x 101.8186pt.
+<latentclass.png, id=101, 685.56125pt x 295.1025pt>
+File: latentclass.png Graphic file (type png)
+<use latentclass.png>
+Package pdftex.def Info: latentclass.png  used on input line 422.
+(pdftex.def)             Requested size: 215.99854pt x 92.97578pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 429--430
+
+ []
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.321 
-       [2]
-<decisiontree1.png, id=102, 438.63875pt x 236.38312pt>
+l.432 ...ive Modeling}\label{predictive-modeling}}
+                                                   [3 <./newbarchart.png> <./hi
+sto.png> <./violin.png> <./correlation.png>]
+<decisiontree1.png, id=118, 438.63875pt x 236.38312pt>
 File: decisiontree1.png Graphic file (type png)
 <use decisiontree1.png>
-Package pdftex.def Info: decisiontree1.png  used on input line 406.
-(pdftex.def)             Requested size: 192.00073pt x 103.47145pt.
-<decisiontree2.png, id=103, 444.66125pt x 399.4925pt>
-File: decisiontree2.png Graphic file (type png)
-<use decisiontree2.png>
-Package pdftex.def Info: decisiontree2.png  used on input line 420.
-(pdftex.def)             Requested size: 192.00073pt x 172.49771pt.
+Package pdftex.def Info: decisiontree1.png  used on input line 446.
+(pdftex.def)             Requested size: 215.99854pt x 116.40224pt.
+<importancechart.png, id=119, 608.2725pt x 270.00874pt>
+File: importancechart.png Graphic file (type png)
+<use importancechart.png>
+Package pdftex.def Info: importancechart.png  used on input line 460.
+(pdftex.def)             Requested size: 215.99854pt x 95.88054pt.
+<confusion.png, id=120, 612.78937pt x 270.00874pt>
+File: confusion.png Graphic file (type png)
+<use confusion.png>
+Package pdftex.def Info: confusion.png  used on input line 474.
+(pdftex.def)             Requested size: 215.99854pt x 95.1719pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+<findings.png, id=121, 736.7525pt x 329.73187pt>
+File: findings.png Graphic file (type png)
+<use findings.png>
+Package pdftex.def Info: findings.png  used on input line 491.
+(pdftex.def)             Requested size: 215.99854pt x 96.66629pt.
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.430 
-       [3 <./barchart.png> <./decisiontree1.png>]
+l.534 
+       [4 <./latentclass.png> <./decisiontree1.png> <./importancechart.png> <./
+confusion.png> <./findings.png>]
 
 LaTeX Font Warning: Font shape `T1/aer/m/it' undefined
-(Font)              using `T1/aer/m/n' instead on input line 484.
+(Font)              using `T1/aer/m/n' instead on input line 555.
 
 
-Overfull \hbox (2.05505pt too wide) in paragraph at lines 481--485
+Overfull \hbox (2.05505pt too wide) in paragraph at lines 552--556
 [] [] 
  []
 
 
-Overfull \hbox (2.05505pt too wide) in paragraph at lines 486--491
-[][][] [] 
- []
-
-
-Overfull \hbox (2.05505pt too wide) in paragraph at lines 492--497
+Overfull \hbox (2.05505pt too wide) in paragraph at lines 557--562
 [][][] [] 
  []
 
@@ -507,19 +575,21 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.501 \end{document}
-                     [4 <./decisiontree2.png>] (./AcademicReport.aux)
+l.566 \end{document}
+                     [5
+
+] (./AcademicReport.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `AcademicReport.out' has not changed.
-(rerunfilecheck)             Checksum: 69E265B8F34E824B918540318C8F45D4;2510.
+(rerunfilecheck)             Checksum: F4F722F8D1006077F4F82FF077752240;2331.
  ) 
 Here is how much of TeX's memory you used:
- 9078 strings out of 480954
- 131861 string characters out of 5905582
- 436840 words of memory out of 5000000
- 26125 multiletter control sequences out of 15000+600000
+ 9127 strings out of 480954
+ 132605 string characters out of 5905582
+ 437001 words of memory out of 5000000
+ 26171 multiletter control sequences out of 15000+600000
  441227 words of font info for 67 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  98i,10n,102p,272b,327s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -531,10 +601,10 @@ t/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/Users/limjj/AppData/Roaming/TinyTeX/t
 exmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><c:/Users/limjj/AppData/Roaming/T
 inyTeX/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/Users/limjj/AppData/Roam
 ing/TinyTeX/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on AcademicReport.pdf (4 pages, 190973 bytes).
+Output written on AcademicReport.pdf (5 pages, 370604 bytes).
 PDF statistics:
- 235 PDF objects out of 1000 (max. 8388607)
- 145 compressed objects within 2 object streams
- 48 named destinations out of 1000 (max. 500000)
- 152 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 257 PDF objects out of 1000 (max. 8388607)
+ 148 compressed objects within 2 object streams
+ 51 named destinations out of 1000 (max. 500000)
+ 174 words of extra memory for PDF output out of 10000 (max. 10000000)
 

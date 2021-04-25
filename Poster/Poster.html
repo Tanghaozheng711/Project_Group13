@@ -288,6 +288,7 @@ font-size: 20pt;
 </div>
 <!-- Right Logo  -->
 <div class="logo_right">
+<img src=picture1.png style="width: 80%">
 </div>
 </div>
 
@@ -304,28 +305,28 @@ font-size: 20pt;
 <div id="approachmethodology" class="section level1">
 <h1>Approach/Methodology</h1>
 <p>Using R, we first performed data wrangling to import the raw data into R. Then, categorical data were transformed into multiple dummy binary data, while data type for ordinal data were set as ordinal. We also split the data by school and subject, to remove the variability in grades due to these variables.</p>
-<p>Exploratory analysis was performed to explore the data set in terms of proportions within each variable. Then, clustering analysis was done to group students similar in terms of their demographics. Subsequently these clusters were compared against each other within individual variables to study the differences between these groups.</p>
-<p>Finally, predictive analysis was performed to identify variables that have significant impact to a student’s grades.</p>
+<p>Exploratory analysis was performed to explore the data set in terms of proportions within each variable. Then, clustering analysis was done to group students similar in terms of their demographics. Subsequently these clusters were compared against each other within individual variables to study the differences between these groups. Finally, predictive analysis was performed to identify variables that have significant impact to a student’s grades.</p>
+<p>The three main analysis will be split into tabs at the top of the application.</p>
 </div>
 <div id="exploratory-data-analysis" class="section level1">
 <h1>Exploratory Data Analysis</h1>
 <strong>Bar Chart/Histogram:</strong> The bar chart and histogram chart is used to visualize the distribution and proportions of each variable in the data set, where the user is able to select the data set as well as the variable to explore.
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-1"></span>
-<img src="barchart.png" alt="Bar chart" width="80%" />
+<img src="newbarchart.png" alt="Bar chart" width="80%" />
 <p class="caption">
 Figure 1: Bar chart
 </p>
 </div>
-<strong>Violin Chart:</strong> The violin chart overlayed with a boxplot provides the user with the distribution and the mean grades for each of the inputs in each variable selected. The chart also provides comparisons between the inputs, where if there is a significant difference in grades, the p-value will be shown.
+<strong>Violin Chart:</strong> The violin chart overlayed with a boxplot provides the user with a chart to compare distribution and the mean grades for each of the inputs in each variable selected. The user is able to select the data set and the variable to explore further.
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-2"></span>
-<img src="barchart.png" alt="Violin chart" width="80%" />
+<img src="violin.png" alt="Violin chart" width="80%" />
 <p class="caption">
 Figure 2: Violin chart
 </p>
 </div>
-<strong>Correlation Chart:</strong> The correlation plot gives the user an overview of the correlations between each variable, including the average grade where positive and negative correlation are indicated by blue and red respectively. Here, the user can select a static plot or an interactive plot, where the user is able view the correlation value by hovering the cursor over the specific cell.
+<strong>Correlation Chart:</strong> The correlation plot gives the user an overview of the correlations between each variable, including the average grade where positive and negative correlation are indicated by blue and red respectively. Here, the user can view the correlation value between two variables by hovering the cursor over the specific cell, and zooming in by dragging a rectangle.
 <div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-3"></span>
-<img src="barchart.png" alt="Correlation Chart" width="80%" />
+<img src="correlation.png" alt="Correlation Chart" width="80%" />
 <p class="caption">
 Figure 3: Correlation Chart
 </p>
@@ -333,35 +334,49 @@ Figure 3: Correlation Chart
 </div>
 <div id="cluster-analysis" class="section level1">
 <h1>Cluster Analysis</h1>
-<p>In cluster analysis, the aim is to group all the data points into smaller groups based on their traits, which are given by the individual inputs for each variable.</p>
+In cluster analysis, latent class clustering was used. The user is able to compare the stacked bar charts based on factor levels for each cluster within each variable box. The user is able to select the data set to review.
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
+<img src="latentclass.png" alt="Correlation Chart" width="80%" />
+<p class="caption">
+Figure 4: Correlation Chart
+</p>
+</div>
 </div>
 <div id="predictive-modeling" class="section level1">
 <h1>Predictive Modeling</h1>
 <strong>Decision Tree:</strong> The decision tree shows how the algorithm predicts the grades based on decisions made through inputs of the selected variables. In the chart, the squares represent the predicted grade bin, while the circles represent the variables used in the decision making process. Here, the user is able to select the number of bins for grades and the variables for analysis.
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-4"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
 <img src="decisiontree1.png" alt="Decision Tree" width="90%" />
 <p class="caption">
-Figure 4: Decision Tree
+Figure 5: Decision Tree
 </p>
 </div>
 <p><strong>Bar Chart:</strong> The bar chart here ranks the selected variables according to the importance, or the significance it has on the student’s grades.</p>
 <strong>Confusion Matrix:</strong> The confusion matrix is vital in allowing the user to see the performance of the prediction. With this, the user is able to compare the accuracy of the prediction with different combinations of variables selected.
-<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-5"></span>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-6"></span>
 <img src="decisiontree2.png" alt="Bar chart and confusion matrix" width="80%" />
 <p class="caption">
-Figure 5: Bar chart and confusion matrix
+Figure 6: Bar chart and confusion matrix
 </p>
 </div>
 </div>
 <div id="findings" class="section level1">
 <h1>Findings</h1>
+<p>We found that the top 5 variables that are important in predicting a student’s grades are number of failures, number of absences, extra education support, weekend alcohol consumption as well as the desire for higher education.</p>
+<div class="figure" style="text-align: center"><span id="fig:unnamed-chunk-7"></span>
+<img src="findings.png" alt="Bar chart and confusion matrix" width="80%" />
+<p class="caption">
+Figure 7: Bar chart and confusion matrix
+</p>
+</div>
+<p>However, based on results from the confusion matrix, the results were not ideal especially for the grade bins for for high and low scores. This could be due to the small number of samples that scored low or high results academically.</p>
 </div>
 <div id="future-work" class="section level1">
 <h1>Future Work</h1>
 <ul>
-<li><p>Including a function to compare distributions or proportions between variables could be added to further explore the different variables in the data set</p></li>
-<li><p>Exploring more methods of analysis, for example latent class analysis for clustering analysis will be useful in comparing results from different methods</p></li>
-<li></li>
+<li><p>Increasing number of data points will improve the robustness of the prediction model, giving more accurate predictions</p></li>
+<li><p>Exploring and comparing more methods of analysis, for example logistic regression for prediction, then comparing the accuracy of both models will be useful</p></li>
+<li><p>Having an additional function to allow users to upload their data to use the application for their own exploration of their data set to expand the usage of this application</p></li>
 </ul>
 </div>
 </div>
