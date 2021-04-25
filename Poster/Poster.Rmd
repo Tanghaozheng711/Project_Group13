@@ -1,5 +1,6 @@
 ---
 title: An Interactive Application To Discover The Impact of Lifestyle and Family Background on Grades
+titlebox_height: "5"
 author:
   - name: Timothy Lim
   - name: Tang Haozheng
@@ -14,12 +15,12 @@ output:
 bibliography: packages.bib
 poster_height: 33.11in
 poster_width: 23.39in
-body_textsize: 35px
+body_textsize: 30px
 title_textsize: 65px
 author_textsize: 40px
 sectitle_textsize: 50px
 sectitle2_textsize: 40px
-knit: pagedown::chrome_print
+#knit: pagedown::chrome_print
 ---
 
 ```{r setup, include=FALSE}
@@ -43,17 +44,17 @@ Finally, predictive analysis was performed to identify variables that have signi
 
 # Exploratory Data Analysis
 **Bar Chart/Histogram:** The bar chart and histogram chart is used to visualize the distribution and proportions of each variable in the data set, where the user is able to select the data set as well as the variable to explore.
-```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', fig.align='center', fig.cap='Great figure!'}
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', fig.align='center', fig.cap='Bar chart'}
 knitr::include_graphics("barchart.png")
 ```
 
 **Violin Chart:** The violin chart overlayed with a boxplot provides the user with the distribution and the mean grades for each of the inputs in each variable selected. The chart also provides comparisons between the inputs, where if there is a significant difference in grades, the p-value will be shown. 
-```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', fig.align='center', fig.cap='Great figure!'}
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', fig.align='center', fig.cap='Violin chart'}
 knitr::include_graphics("barchart.png")
 ```
 
 **Correlation Chart:** The correlation plot gives the user an overview of the correlations between each variable, including the average grade where positive and negative correlation are indicated by blue and red respectively. Here, the user can select a static plot or an interactive plot, where the user is able view the correlation value by hovering the cursor over the specific cell. 
-```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', fig.align='center', fig.cap='Great figure!'}
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', fig.align='center', fig.cap='Correlation Chart'}
 knitr::include_graphics("barchart.png")
 ```
 
@@ -62,6 +63,17 @@ knitr::include_graphics("barchart.png")
 In cluster analysis, the aim is to group all the data points into smaller groups based on their traits, which are given by the individual inputs for each variable. 
 
 # Predictive Modeling
+**Decision Tree:** The decision tree shows how the algorithm predicts the grades based on decisions made through inputs of the selected variables. In the chart, the squares represent the predicted grade bin, while the circles represent the variables used in the decision making process. Here, the user is able to select the number of bins for grades and the variables for analysis.
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='90%', fig.align='center', fig.cap='Decision Tree'}
+knitr::include_graphics("decisiontree1.png")
+```
+
+**Bar Chart:** The bar chart here ranks the selected variables according to the importance, or the significance it has on the student's grades. 
+
+**Confusion Matrix:** The confusion matrix is vital in allowing the user to see the performance of the prediction. With this, the user is able to compare the accuracy of the prediction with different combinations of variables selected. 
+```{r echo=FALSE, message=FALSE, warning=FALSE, out.width='80%', fig.align='center', fig.cap='Bar chart and confusion matrix'}
+knitr::include_graphics("decisiontree2.png")
+```
 
 # Findings
 
