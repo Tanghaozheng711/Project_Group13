@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.4.20)  25 APR 2021 21:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2021.4.20)  25 APR 2021 22:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -510,13 +510,13 @@ Package pdftex.def Info: correlation.png  used on input line 394.
 <latentclass.png, id=101, 685.56125pt x 295.1025pt>
 File: latentclass.png Graphic file (type png)
 <use latentclass.png>
-Package pdftex.def Info: latentclass.png  used on input line 422.
+Package pdftex.def Info: latentclass.png  used on input line 423.
 (pdftex.def)             Requested size: 215.99854pt x 92.97578pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 429--430
+Underfull \hbox (badness 10000) in paragraph at lines 430--431
 
  []
 
@@ -524,23 +524,23 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.432 ...ive Modeling}\label{predictive-modeling}}
+l.433 ...ive Modeling}\label{predictive-modeling}}
                                                    [3 <./newbarchart.png> <./hi
 sto.png> <./violin.png> <./correlation.png>]
 <decisiontree1.png, id=118, 438.63875pt x 236.38312pt>
 File: decisiontree1.png Graphic file (type png)
 <use decisiontree1.png>
-Package pdftex.def Info: decisiontree1.png  used on input line 446.
+Package pdftex.def Info: decisiontree1.png  used on input line 447.
 (pdftex.def)             Requested size: 215.99854pt x 116.40224pt.
 <importancechart.png, id=119, 608.2725pt x 270.00874pt>
 File: importancechart.png Graphic file (type png)
 <use importancechart.png>
-Package pdftex.def Info: importancechart.png  used on input line 460.
+Package pdftex.def Info: importancechart.png  used on input line 461.
 (pdftex.def)             Requested size: 215.99854pt x 95.88054pt.
 <confusion.png, id=120, 612.78937pt x 270.00874pt>
 File: confusion.png Graphic file (type png)
 <use confusion.png>
-Package pdftex.def Info: confusion.png  used on input line 474.
+Package pdftex.def Info: confusion.png  used on input line 475.
 (pdftex.def)             Requested size: 215.99854pt x 95.1719pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -548,26 +548,26 @@ LaTeX Warning: `h' float specifier changed to `ht'.
 <findings.png, id=121, 736.7525pt x 329.73187pt>
 File: findings.png Graphic file (type png)
 <use findings.png>
-Package pdftex.def Info: findings.png  used on input line 491.
+Package pdftex.def Info: findings.png  used on input line 492.
 (pdftex.def)             Requested size: 215.99854pt x 96.66629pt.
 pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.534 
+l.535 
        [4 <./latentclass.png> <./decisiontree1.png> <./importancechart.png> <./
 confusion.png> <./findings.png>]
 
 LaTeX Font Warning: Font shape `T1/aer/m/it' undefined
-(Font)              using `T1/aer/m/n' instead on input line 555.
+(Font)              using `T1/aer/m/n' instead on input line 556.
 
 
-Overfull \hbox (2.05505pt too wide) in paragraph at lines 552--556
+Overfull \hbox (2.05505pt too wide) in paragraph at lines 553--557
 [] [] 
  []
 
 
-Overfull \hbox (2.05505pt too wide) in paragraph at lines 557--562
+Overfull \hbox (2.05505pt too wide) in paragraph at lines 558--563
 [][][] [] 
  []
 
@@ -575,7 +575,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.}) has b
 een already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.566 \end{document}
+l.567 \end{document}
                      [5
 
 ] (./AcademicReport.aux)
@@ -583,16 +583,16 @@ l.566 \end{document}
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
 Package rerunfilecheck Info: File `AcademicReport.out' has not changed.
-(rerunfilecheck)             Checksum: F4F722F8D1006077F4F82FF077752240;2331.
+(rerunfilecheck)             Checksum: 2D6AF32D2F2DA848DFE7B5DF4753DDD0;2364.
  ) 
 Here is how much of TeX's memory you used:
  9127 strings out of 480954
- 132605 string characters out of 5905582
- 437001 words of memory out of 5000000
+ 132617 string characters out of 5905582
+ 437009 words of memory out of 5000000
  26171 multiletter control sequences out of 15000+600000
  441227 words of font info for 67 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 98i,10n,102p,272b,327s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 98i,10n,102p,281b,327s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Users/limjj/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.en
 c} <c:/Users/limjj/AppData/Roaming/TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/e
 c/ecrm0900.600pk><c:/Users/limjj/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1
@@ -601,7 +601,7 @@ t/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/Users/limjj/AppData/Roaming/TinyTeX/t
 exmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><c:/Users/limjj/AppData/Roaming/T
 inyTeX/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/Users/limjj/AppData/Roam
 ing/TinyTeX/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on AcademicReport.pdf (5 pages, 370604 bytes).
+Output written on AcademicReport.pdf (5 pages, 370670 bytes).
 PDF statistics:
  257 PDF objects out of 1000 (max. 8388607)
  148 compressed objects within 2 object streams
